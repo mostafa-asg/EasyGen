@@ -1,6 +1,7 @@
 package com.github.generator.expersions;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -12,6 +13,10 @@ public class SequenceExpersion extends Expersion {
 
     public void addExpersion(Expersion exp){
         expersions.add( exp );
+    }
+
+    public List<Expersion> getExpersions(){
+        return Collections.unmodifiableList(expersions);
     }
 
     @Override

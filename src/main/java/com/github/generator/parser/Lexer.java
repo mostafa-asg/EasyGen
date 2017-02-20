@@ -1,7 +1,5 @@
 package com.github.generator.parser;
 
-import java.util.Stack;
-
 /**
  * @author Mostafa Asgari
  * @since 2/19/17
@@ -12,7 +10,6 @@ public class Lexer {
     private String input;
     private int pos = 0;
     private char c;
-    private Stack<Integer> posStack = new Stack<Integer>();
 
     public Lexer(String input) {
 
@@ -42,6 +39,9 @@ public class Lexer {
         while (c != untilChar){
             sb.append(c);
             consume();
+
+            if( c==EOF )
+                throw new Error("reach end of file");
         }
 
         return sb.toString();
@@ -58,6 +58,23 @@ public class Lexer {
         if( c == expected ) {
             consume();
             return true;
+        }
+
+        return false;
+    }
+
+    public boolean isLookahead(String str) {
+
+        if( pos + str.length() < input.length() ){
+            return input.substring( pos+1 , pos+1+str.length() ).equals(str);
+        }
+
+        return false;
+    }
+
+    public boolean isLookahead(char ch){
+        if( pos+1 < input.length() ){
+            return input.charAt(pos+1) == ch;
         }
 
         return false;
@@ -90,16 +107,16 @@ public class Lexer {
                     consume();
                     return new Token("'", Token.Type.SINGLE_QUOTES);
                 case '.':
-                    posStack.push( pos );
-                    consume();
-                    if (tryMatch( '.' )){
-                        posStack.pop();
+                    if(isLookahead('.')){
+                        consume();
+                        consume();
                         return new Token("..", Token.Type.DOUBLE_DOT);
                     }
                     else{
-                        pos = posStack.pop();
                         return userData();
                     }
+                default:
+                    return userData();
             }
 
         }
@@ -112,16 +129,53 @@ public class Lexer {
             consume();
     }
 
+    private boolean isNumber(String str){
+
+        if(str==null || str.length()==0)
+            return false;
+
+        for( int i=0;i<str.length();i++ ){
+            if( !Character.isDigit(str.charAt(i)) )
+                return false;
+        }
+
+        if( str.length() > 1 && str.charAt(0) == '0' ){
+            return false;
+        }
+
+        return true;
+    }
+
     private Token userData(){
 
         StringBuilder sb = new StringBuilder();
 
-        while (c != '[' || c!='(' ){
-            sb.append( c );
+        while ( true ){
+
+            if( c==EOF || c=='[' || c==']' || c==')' )
+                break;
+
+            if( c=='(' ){
+                if( FunctionTables.isAFunction(sb.toString()) ){
+                    return new Token(sb.toString(),Token.Type.FUNCTION);
+                }
+            }
+
+            if( c=='.' && isLookahead('.') ){
+                break;
+            }
+
+            sb.append(c);
             consume();
         }
 
-        return new Token(sb.toString(),Token.Type.STRING_TERMINAL);
+        if( sb.length() == 1 && Character.isAlphabetic(sb.charAt(0)) )
+            return new Token(sb.toString(),Token.Type.CHAR);
+        else if ( isNumber(sb.toString()) )
+            return new Token(sb.toString(),Token.Type.NUMBER);
+        else
+            return new Token(sb.toString(),Token.Type.STRING);
+
     }
 
 }

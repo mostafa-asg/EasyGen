@@ -14,24 +14,30 @@ public class Token {
         L_BRACKET,
         R_BRACKET,
         DOUBLE_DOT,
-        STRING_TERMINAL,
-        NUMBER_TERMINAL,
+        STRING,
+        CHAR ,
+        NUMBER ,
+        FUNCTION,
         PLUS,
         MINUS,
         EOF //end of file
 
     }
 
-    private String name;
+    private String value;
     private Token.Type type;
 
-    public Token(String name, Type type) {
-        this.name = name;
+    public Token(String value, Type type) {
+        this.value = value;
         this.type = type;
     }
 
-    public String getName() {
-        return name;
+    public String getValue() {
+        return value;
+    }
+
+    public Long getValueAsLong(){
+        return Long.valueOf(value);
     }
 
     public Type getType() {
