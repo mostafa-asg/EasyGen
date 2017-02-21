@@ -13,6 +13,7 @@ public class Token {
         R_PARENTHESE ,
         L_BRACKET,
         R_BRACKET,
+        PIPE ,
         DOUBLE_DOT,
         STRING,
         CHAR ,
@@ -38,6 +39,13 @@ public class Token {
 
     public Long getValueAsLong(){
         return Long.valueOf(value);
+    }
+
+    public char getValueAsChar(){
+        if( value.length() != 1 ){
+            throw new Error("cannot cast " + value + " as a char");
+        }
+        return value.charAt(0);
     }
 
     public Type getType() {

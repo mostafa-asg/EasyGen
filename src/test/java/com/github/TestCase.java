@@ -2,7 +2,9 @@ package com.github;
 
 import com.github.generator.expersions.Expersion;
 import com.github.generator.expersions.SequenceExpersion;
+import com.github.generator.expersions.functions.ranges.CharRange;
 import com.github.generator.expersions.functions.ranges.LongRange;
+import com.github.generator.expersions.terminals.CharTerminal;
 import com.github.generator.expersions.terminals.LongTerminal;
 import com.github.generator.expersions.terminals.StringTerminal;
 import com.github.generator.parser.Lexer;
@@ -31,10 +33,10 @@ public class TestCase {
         SequenceExpersion seqExp = parser.parse();
         List<Expersion> expList = seqExp.getExpersions();
 
-        Assert.assertEquals( expList.size() , 2 );
+        Assert.assertEquals( 2 , expList.size() );
 
         Assert.assertTrue( expList.get(0) instanceof StringTerminal);
-        Assert.assertEquals( ((StringTerminal)expList.get(0)).getValue() , "Hello" );
+        Assert.assertEquals( "Hello" , ((StringTerminal)expList.get(0)).getValue() );
 
         Assert.assertTrue( expList.get(1) instanceof LongRange);
         LongRange longRange = ((LongRange)expList.get(1));
@@ -42,7 +44,7 @@ public class TestCase {
 
         Long num = new Long(1);
         while (it.hasNext()){
-             Assert.assertEquals(it.next().getValue(),num);
+             Assert.assertEquals(num,it.next().getValue());
             ++num;
         }
 
@@ -62,19 +64,19 @@ public class TestCase {
         SequenceExpersion seqExp = parser.parse();
         List<Expersion> expList = seqExp.getExpersions();
 
-        Assert.assertEquals( expList.size() , 2 );
+        Assert.assertEquals( 2 , expList.size() );
 
         Assert.assertTrue( expList.get(0) instanceof LongRange);
         LongRange longRange = ((LongRange)expList.get(0));
         Iterator<LongTerminal> it = longRange.iterator();
         Long num = new Long(120);
         while (it.hasNext()){
-            Assert.assertEquals(it.next().getValue(),num);
+            Assert.assertEquals(num,it.next().getValue());
             ++num;
         }
 
         Assert.assertTrue( expList.get(1) instanceof StringTerminal);
-        Assert.assertEquals( ((StringTerminal)expList.get(1)).getValue() , "Hello" );
+        Assert.assertEquals( "Hello" , ((StringTerminal)expList.get(1)).getValue() );
 
         String generatedStr = seqExp.generate();
         Assert.assertTrue( generatedStr.length() == 8 );
@@ -93,26 +95,26 @@ public class TestCase {
         SequenceExpersion seqExp = parser.parse();
         List<Expersion> expList = seqExp.getExpersions();
 
-        Assert.assertEquals( expList.size() , 3 );
+        Assert.assertEquals( 3 , expList.size() );
 
         Assert.assertTrue( expList.get(0) instanceof LongRange);
         LongRange longRange = ((LongRange)expList.get(0));
         Iterator<LongTerminal> it = longRange.iterator();
         Long num = new Long(100);
         while (it.hasNext()){
-            Assert.assertEquals(it.next().getValue(),num);
+            Assert.assertEquals(num,it.next().getValue());
             ++num;
         }
 
         Assert.assertTrue( expList.get(1) instanceof StringTerminal);
-        Assert.assertEquals( ((StringTerminal)expList.get(1)).getValue() , "Hello" );
+        Assert.assertEquals( "Hello" , ((StringTerminal)expList.get(1)).getValue() );
 
         Assert.assertTrue( expList.get(2) instanceof LongRange);
         longRange = ((LongRange)expList.get(2));
         it = longRange.iterator();
         num = new Long(5);
         while (it.hasNext()){
-            Assert.assertEquals(it.next().getValue(),num);
+            Assert.assertEquals(num,it.next().getValue());
             ++num;
         }
 
@@ -135,7 +137,7 @@ public class TestCase {
         SequenceExpersion seqExp = parser.parse();
         List<Expersion> expList = seqExp.getExpersions();
 
-        Assert.assertEquals( expList.size() , 1 );
+        Assert.assertEquals( 1 , expList.size() );
 
         Assert.assertTrue( expList.get(0) instanceof LongRange);
         LongRange longRange = ((LongRange)expList.get(0));
@@ -143,9 +145,156 @@ public class TestCase {
 
         Long num = new Long(0);
         while (it.hasNext()){
-            Assert.assertEquals(it.next().getValue(),num);
+            Assert.assertEquals(num,it.next().getValue());
             ++num;
         }
     }
 
+    @Test
+    public void test5() throws ParseException {
+
+        String input = "[a..z]";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpersion seqExp = parser.parse();
+        List<Expersion> expList = seqExp.getExpersions();
+
+        Assert.assertEquals( 1 , expList.size() );
+
+        Assert.assertTrue( expList.get(0) instanceof CharRange);
+        CharRange charRange = ((CharRange)expList.get(0));
+        Iterator<CharTerminal> it = charRange.iterator();
+
+        char ch = 'a';
+        while (it.hasNext()){
+            Assert.assertTrue( it.next().getValue()==ch );
+            ++ch;
+        }
+        Assert.assertTrue( --ch == 'z' );
+    }
+
+    @Test
+    public void test6() throws ParseException {
+
+        String input = "[a..c][d..g]";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpersion seqExp = parser.parse();
+        List<Expersion> expList = seqExp.getExpersions();
+
+        Assert.assertEquals( 2 , expList.size() );
+
+        Assert.assertTrue( expList.get(0) instanceof CharRange);
+        CharRange charRange = ((CharRange)expList.get(0));
+        Iterator<CharTerminal> it = charRange.iterator();
+        char ch = 'a';
+        while (it.hasNext()){
+            Assert.assertTrue( it.next().getValue()==ch );
+            ++ch;
+        }
+        Assert.assertTrue( --ch == 'c' );
+
+        Assert.assertTrue( expList.get(1) instanceof CharRange);
+        charRange = ((CharRange)expList.get(1));
+        it = charRange.iterator();
+        ch = 'd';
+        while (it.hasNext()){
+            Assert.assertTrue( it.next().getValue()==ch );
+            ++ch;
+        }
+        Assert.assertTrue( --ch == 'g' );
+    }
+
+    @Test
+    public void test7() throws ParseException {
+
+        String input = "[a..c][1..5][d..g][666..777]";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpersion seqExp = parser.parse();
+        List<Expersion> expList = seqExp.getExpersions();
+
+        Assert.assertEquals( 4 , expList.size() );
+
+        //-----------------------------------------------------
+        Assert.assertTrue( expList.get(0) instanceof CharRange);
+        CharRange charRange = ((CharRange)expList.get(0));
+        Iterator<CharTerminal> it = charRange.iterator();
+        char ch = 'a';
+        while (it.hasNext()){
+            Assert.assertTrue( it.next().getValue()==ch );
+            ++ch;
+        }
+        Assert.assertTrue( --ch == 'c' );
+        //-----------------------------------------------------
+        Assert.assertTrue( expList.get(1) instanceof LongRange);
+        LongRange longRange = ((LongRange)expList.get(1));
+        Iterator<LongTerminal> itLong = longRange.iterator();
+
+        Long num = new Long(1);
+        while (itLong.hasNext()){
+            Assert.assertEquals(num,itLong.next().getValue());
+            ++num;
+        }
+        Assert.assertEquals( new Long(5) , --num );
+        //-----------------------------------------------------
+        Assert.assertTrue( expList.get(2) instanceof CharRange);
+        charRange = ((CharRange)expList.get(2));
+        it = charRange.iterator();
+        ch = 'd';
+        while (it.hasNext()){
+            Assert.assertTrue( it.next().getValue()==ch );
+            ++ch;
+        }
+        Assert.assertTrue( --ch == 'g' );
+        //-----------------------------------------------------
+        Assert.assertTrue( expList.get(3) instanceof LongRange);
+        longRange = ((LongRange)expList.get(3));
+        itLong = longRange.iterator();
+
+        num = new Long(666);
+        while (itLong.hasNext()){
+            Assert.assertEquals(num,itLong.next().getValue());
+            ++num;
+        }
+        Assert.assertEquals( new Long(777) , --num );
+
+    }
+
+    @Test
+    public void test8() throws ParseException {
+        String input = "This is a sentence[A..Z].And this is another[1..7] sentence";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpersion seqExp = parser.parse();
+        List<Expersion> expList = seqExp.getExpersions();
+
+        Assert.assertEquals( 11 , expList.size() );
+        Assert.assertTrue( seqExp.getExpersions().get(4) instanceof CharRange );
+        Assert.assertTrue( seqExp.getExpersions().get(9) instanceof LongRange );
+
+        //------------------------------------------------
+        CharRange charRange = ((CharRange)expList.get(4));
+        Iterator<CharTerminal> it = charRange.iterator();
+        char ch = 'A';
+        while (it.hasNext()){
+            Assert.assertTrue( it.next().getValue()==ch );
+            ++ch;
+        }
+        Assert.assertTrue( --ch == 'Z' );
+        //------------------------------------------------
+        LongRange longRange = ((LongRange)expList.get(9));
+        Iterator<LongTerminal> itLong = longRange.iterator();
+
+        Long num = new Long(1);
+        while (itLong.hasNext()){
+            Assert.assertEquals(num,itLong.next().getValue());
+            ++num;
+        }
+        Assert.assertEquals( new Long(7) , --num );
+    }
 }

@@ -9,8 +9,16 @@ import java.util.List;
  */
 public class StringRange extends Range<StringTerminal> {
 
+    public StringRange(){
+
+    }
+
     public StringRange(StringTerminal... terminals) {
         super(terminals);
+    }
+
+    public void addItem(StringTerminal terminal){
+        this.range.add( terminal );
     }
 
     @Override

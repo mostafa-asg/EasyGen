@@ -8,7 +8,7 @@ public class Lexer {
 
     public static final char EOF = (char)-1; // represent end of file char
     private String input;
-    private int pos = 0;
+    private int pos;
     private char c;
 
     public Lexer(String input) {
@@ -17,7 +17,17 @@ public class Lexer {
             throw new IllegalArgumentException("input");
 
         this.input = input;
+
+        seek(0);
+    }
+
+    public void seek(int newPos){
+        pos = newPos;
         c = input.charAt(pos);
+    }
+
+    public int getCurrentPosition(){
+        return pos;
     }
 
     /**
@@ -79,6 +89,25 @@ public class Lexer {
 
         return false;
     }
+    public boolean isLookaheadIgnoreWhitespace(char expectedChar) {
+
+        int tempPos = pos+1;
+
+        if(tempPos+1 >= input.length())
+            return false;
+
+        char c = input.charAt(tempPos);
+        while ( isWhitespace() ){
+            ++tempPos;
+
+            if( tempPos>=input.length() )
+                return false;
+
+            c = input.charAt(tempPos);
+        }
+
+        return c == expectedChar;
+    }
 
     public Token nextToken(){
 
@@ -103,6 +132,9 @@ public class Lexer {
                 case ')':
                     consume();
                     return new Token(")", Token.Type.R_PARENTHESE);
+                case '|':
+                    consume();
+                    return new Token("|", Token.Type.R_BRACKET);
                 case '\'':
                     consume();
                     return new Token("'", Token.Type.SINGLE_QUOTES);
@@ -125,8 +157,15 @@ public class Lexer {
     }
 
     private void whitespace(){
-        while ( c==' ' || c=='\t' || c=='\n' || c=='\r')
+        while ( isWhitespace() )
             consume();
+    }
+
+    private boolean isWhitespace(){
+        if( c==' ' || c=='\t' || c=='\n' || c=='\r' )
+            return true;
+
+        return false;
     }
 
     private boolean isNumber(String str){
@@ -152,7 +191,7 @@ public class Lexer {
 
         while ( true ){
 
-            if( c==EOF || c=='[' || c==']' || c==')' )
+            if( c==EOF || c=='[' || c==']' || c==')' || c=='|' || isWhitespace() )
                 break;
 
             if( c=='(' ){

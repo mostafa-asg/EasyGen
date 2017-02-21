@@ -18,6 +18,10 @@ public abstract class Range<T extends Terminal> extends Expersion implements Ite
 
     protected List<T> range;
 
+    public Range(){
+
+    }
+
     public Range(T... terminals ){
         this.range = initRange(terminals);
     }
