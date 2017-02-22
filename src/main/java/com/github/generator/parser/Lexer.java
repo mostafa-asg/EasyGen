@@ -42,6 +42,34 @@ public class Lexer {
         }
     }
 
+    public String readSingleQuoteString(){
+
+        StringBuilder sb = new StringBuilder();
+
+        while (true){
+
+            if( c == '\'' ){
+                if( sb.length() > 0 && sb.charAt(sb.length()-1) == '\\' ){
+                    sb.deleteCharAt(sb.length()-1);
+                    sb.append( c );
+                }
+                else{
+                    consume();
+                    break;
+                }
+            }
+
+            sb.append(c);
+            consume();
+
+            if( c==EOF )
+                throw new Error("reach end of file");
+        }
+
+        return sb.toString();
+
+    }
+
     public String consumeUntil(char untilChar){
 
         StringBuilder sb = new StringBuilder();
@@ -109,6 +137,11 @@ public class Lexer {
         return c == expectedChar;
     }
 
+    private Token currentToken;
+    public Token getCurrentToken(){
+        return currentToken;
+    }
+
     public Token nextToken(){
 
         while (c!=EOF){
@@ -119,30 +152,38 @@ public class Lexer {
                     continue;
                 case ',':
                     consume();
-                    return new Token(",", Token.Type.COMMA);
+                    currentToken = new Token(",", Token.Type.COMMA);
+                    return currentToken;
                 case '[':
                     consume();
-                    return new Token("[", Token.Type.L_BRACKET);
+                    currentToken = new Token("[", Token.Type.L_BRACKET);
+                    return currentToken;
                 case ']':
                     consume();
-                    return new Token("]", Token.Type.R_BRACKET);
+                    currentToken = new Token("]", Token.Type.R_BRACKET);
+                    return currentToken;
                 case '(':
                     consume();
-                    return new Token("(", Token.Type.L_PARENTHESE);
+                    currentToken = new Token("(", Token.Type.L_PARENTHESE);
+                    return currentToken;
                 case ')':
                     consume();
-                    return new Token(")", Token.Type.R_PARENTHESE);
+                    currentToken = new Token(")", Token.Type.R_PARENTHESE);
+                    return currentToken;
                 case '|':
                     consume();
-                    return new Token("|", Token.Type.R_BRACKET);
+                    currentToken = new Token("|", Token.Type.PIPE);
+                    return currentToken;
                 case '\'':
                     consume();
-                    return new Token("'", Token.Type.SINGLE_QUOTES);
+                    currentToken = new Token("'", Token.Type.SINGLE_QUOTES);
+                    return currentToken;
                 case '.':
                     if(isLookahead('.')){
                         consume();
                         consume();
-                        return new Token("..", Token.Type.DOUBLE_DOT);
+                        currentToken = new Token("..", Token.Type.DOUBLE_DOT);
+                        return currentToken;
                     }
                     else{
                         return userData();
@@ -153,7 +194,8 @@ public class Lexer {
 
         }
 
-        return new Token("EOF", Token.Type.EOF);
+        currentToken = new Token("EOF", Token.Type.EOF);
+        return currentToken;
     }
 
     private void whitespace(){
@@ -196,7 +238,8 @@ public class Lexer {
 
             if( c=='(' ){
                 if( FunctionTables.isAFunction(sb.toString()) ){
-                    return new Token(sb.toString(),Token.Type.FUNCTION);
+                    currentToken = new Token(sb.toString(),Token.Type.FUNCTION);
+                    return currentToken;
                 }
             }
 
@@ -208,12 +251,18 @@ public class Lexer {
             consume();
         }
 
-        if( sb.length() == 1 && Character.isAlphabetic(sb.charAt(0)) )
-            return new Token(sb.toString(),Token.Type.CHAR);
-        else if ( isNumber(sb.toString()) )
-            return new Token(sb.toString(),Token.Type.NUMBER);
-        else
-            return new Token(sb.toString(),Token.Type.STRING);
+        if( sb.length() == 1 && Character.isAlphabetic(sb.charAt(0)) ) {
+            currentToken = new Token(sb.toString(), Token.Type.CHAR);
+            return currentToken;
+        }
+        else if ( isNumber(sb.toString()) ) {
+            currentToken = new Token(sb.toString(), Token.Type.NUMBER);
+            return currentToken;
+        }
+        else {
+            currentToken = new Token(sb.toString(), Token.Type.STRING);
+            return currentToken;
+        }
 
     }
 

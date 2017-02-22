@@ -19,7 +19,7 @@ public abstract class Range<T extends Terminal> extends Expersion implements Ite
     protected List<T> range;
 
     public Range(){
-
+        range = new ArrayList<T>();
     }
 
     public Range(T... terminals ){

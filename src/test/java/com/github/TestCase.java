@@ -4,6 +4,7 @@ import com.github.generator.expersions.Expersion;
 import com.github.generator.expersions.SequenceExpersion;
 import com.github.generator.expersions.functions.ranges.CharRange;
 import com.github.generator.expersions.functions.ranges.LongRange;
+import com.github.generator.expersions.functions.ranges.StringRange;
 import com.github.generator.expersions.terminals.CharTerminal;
 import com.github.generator.expersions.terminals.LongTerminal;
 import com.github.generator.expersions.terminals.StringTerminal;
@@ -297,4 +298,122 @@ public class TestCase {
         }
         Assert.assertEquals( new Long(7) , --num );
     }
+
+    @Test
+    public void test9() throws ParseException {
+        String input = "[Hello|World|Bye]";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpersion seqExp = parser.parse();
+        List<Expersion> expList = seqExp.getExpersions();
+
+        Assert.assertEquals( 1 , expList.size() );
+        Assert.assertTrue( expList.get(0) instanceof StringRange );
+        Iterator<StringTerminal> it = ((StringRange) expList.get(0)).iterator();
+
+        String[] words = new String[] {"Hello","World","Bye"};
+        int i=0;
+
+        while (it.hasNext()){
+            Assert.assertEquals( words[i] , it.next().getValue() );
+            ++i;
+        }
+    }
+
+    @Test
+    public void test10() throws ParseException {
+        String input = "[Hello|World]";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpersion seqExp = parser.parse();
+        List<Expersion> expList = seqExp.getExpersions();
+
+        Assert.assertEquals( 1 , expList.size() );
+        Assert.assertTrue( expList.get(0) instanceof StringRange );
+        Iterator<StringTerminal> it = ((StringRange) expList.get(0)).iterator();
+
+        String[] words = new String[] {"Hello","World"};
+        int i=0;
+
+        while (it.hasNext()){
+            Assert.assertEquals( words[i] , it.next().getValue() );
+            ++i;
+        }
+    }
+
+    @Test
+    public void test11() throws ParseException {
+        String input = "[Hello|'Hello World.This is a test'|World|'another world']";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpersion seqExp = parser.parse();
+        List<Expersion> expList = seqExp.getExpersions();
+
+        Assert.assertEquals( 1 , expList.size() );
+        Assert.assertTrue( expList.get(0) instanceof StringRange );
+        Iterator<StringTerminal> it = ((StringRange) expList.get(0)).iterator();
+
+        String[] words = new String[] {"Hello","Hello World.This is a test","World","another world"};
+        int i=0;
+
+        while (it.hasNext()){
+            Assert.assertEquals( words[i] , it.next().getValue() );
+            ++i;
+        }
+    }
+
+    @Test
+    public void test12() throws ParseException {
+        String input = "['Hello|World|This|is|a|test'|World|'another world']";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpersion seqExp = parser.parse();
+        List<Expersion> expList = seqExp.getExpersions();
+
+        Assert.assertEquals( 1 , expList.size() );
+        Assert.assertTrue( expList.get(0) instanceof StringRange );
+        Iterator<StringTerminal> it = ((StringRange) expList.get(0)).iterator();
+
+        String[] words = new String[] {"Hello|World|This|is|a|test","World","another world"};
+        int i=0;
+
+        while (it.hasNext()){
+            Assert.assertEquals( words[i] , it.next().getValue() );
+            ++i;
+        }
+    }
+
+    @Test
+    public void test13() throws ParseException {
+        String input = "'Hello World REP([a..z],6)'";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpersion seqExp = parser.parse();
+        List<Expersion> expList = seqExp.getExpersions();
+
+        Assert.assertEquals(1, expList.size());
+        Assert.assertTrue( expList.get(0) instanceof StringTerminal );
+        Assert.assertEquals( "Hello World REP([a..z],6)" , ((StringTerminal)expList.get(0)).getValue() );
+    }
+
+    @Test
+    public void test14() throws ParseException {
+        String input = "'REP([a..z],6)'";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpersion seqExp = parser.parse();
+        List<Expersion> expList = seqExp.getExpersions();
+
+        Assert.assertEquals(1, expList.size());
+        Assert.assertTrue( expList.get(0) instanceof StringTerminal );
+        Assert.assertEquals( "REP([a..z],6)" , ((StringTerminal)expList.get(0)).getValue() );
+    }
+
+
 }

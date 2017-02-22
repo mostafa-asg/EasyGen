@@ -29,7 +29,10 @@ public class Parser {
             if( token.getType()==Token.Type.EOF )
                 break;
 
-            if( token.getType() == Token.Type.STRING || token.getType() == Token.Type.CHAR )
+            if( token.getType() == Token.Type.SINGLE_QUOTES ){
+                result.addExpersion( new StringTerminal(lexer.readSingleQuoteString()) );
+            }
+            else if( token.getType() == Token.Type.STRING || token.getType() == Token.Type.CHAR )
                 result.addExpersion( new StringTerminal(token.getValue()));
             else if( token.getType() == Token.Type.SINGLE_QUOTES ){
                 result.addExpersion(new StringTerminal(lexer.consumeUntil('\'')));
@@ -47,9 +50,7 @@ public class Parser {
 
         Token token = lexer.nextToken();
         if( token.getType() == Token.Type.SINGLE_QUOTES ){
-            String str = lexer.consumeUntil('\'');
-            lexer.match('\'');
-            return str;
+            return lexer.readSingleQuoteString();
         }
 
         return token.getValue();
@@ -60,15 +61,17 @@ public class Parser {
         StringRange result = new StringRange();
         result.addItem( new StringTerminal(readString()) );
 
-        do{
-
-            if(lexer.nextToken().getType() != Token.Type.PIPE){
-                throw new ParseException();
-            }
-            result.addItem( new StringTerminal(readString()) );
-
+        if(lexer.nextToken().getType() != Token.Type.PIPE){
+            throw new ParseException();
         }
-        while( lexer.isLookaheadIgnoreWhitespace('|') );
+        result.addItem( new StringTerminal(readString()) );
+
+        while (lexer.nextToken().getType() == Token.Type.PIPE){
+            result.addItem( new StringTerminal(readString()) );
+        }
+
+        if( lexer.getCurrentToken().getType() != Token.Type.R_BRACKET )
+            throw new ParseException();
 
         return result;
     }
@@ -87,8 +90,15 @@ public class Parser {
         boolean isPipeDelimiter = false;
 
         int tempPos = lexer.getCurrentPosition();
-        if (getNextNToken(2).getType() == Token.Type.PIPE){
+
+        Token firstParam = lexer.nextToken();
+        if( firstParam.getType() == Token.Type.SINGLE_QUOTES ){
             isPipeDelimiter = true;
+        }
+        else {
+            lexer.seek(tempPos);
+            if (getNextNToken(2).getType() == Token.Type.PIPE)
+                isPipeDelimiter = true;
         }
         lexer.seek(tempPos);
 
@@ -96,8 +106,7 @@ public class Parser {
             return parseRangePipeDelimiter();
         }
         else {
-
-            Token firstParam = lexer.nextToken();
+            firstParam = lexer.nextToken();
 
             if (firstParam.getType() == Token.Type.NUMBER) {
                 if (lexer.nextToken().getType() != Token.Type.DOUBLE_DOT)
