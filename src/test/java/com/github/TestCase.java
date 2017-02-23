@@ -2,6 +2,9 @@ package com.github;
 
 import com.github.generator.expersions.Expersion;
 import com.github.generator.expersions.SequenceExpersion;
+import com.github.generator.expersions.functions.Date;
+import com.github.generator.expersions.functions.Newline;
+import com.github.generator.expersions.functions.Rep;
 import com.github.generator.expersions.functions.ranges.CharRange;
 import com.github.generator.expersions.functions.ranges.LongRange;
 import com.github.generator.expersions.functions.ranges.StringRange;
@@ -415,5 +418,140 @@ public class TestCase {
         Assert.assertEquals( "REP([a..z],6)" , ((StringTerminal)expList.get(0)).getValue() );
     }
 
+    @Test
+    public void test15() throws ParseException{
+
+        String input = "REP([a..z],34)";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpersion seqExp = parser.parse();
+        List<Expersion> expList = seqExp.getExpersions();
+
+        Assert.assertEquals(1, expList.size());
+        Assert.assertTrue( expList.get(0) instanceof Rep);
+
+        Rep rep = (Rep)expList.get(0);
+        Assert.assertTrue( rep.getExpersion() instanceof CharRange );
+        Assert.assertEquals( 34 , rep.getMinimumLength() );
+        Assert.assertEquals(34, rep.getMaximumLength());
+
+        Iterator<CharTerminal> it = ((CharRange) rep.getExpersion()).iterator();
+        char ch = 'a';
+        while (it.hasNext()){
+            Assert.assertTrue( it.next().getValue()==ch );
+            ++ch;
+        }
+        Assert.assertTrue( --ch == 'z' );
+    }
+
+    @Test
+    public void test16() throws ParseException{
+
+        String input = "REP([10..99],3,7)";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpersion seqExp = parser.parse();
+        List<Expersion> expList = seqExp.getExpersions();
+
+        Assert.assertEquals(1, expList.size());
+        Assert.assertTrue( expList.get(0) instanceof Rep);
+
+        Rep rep = (Rep)expList.get(0);
+        Assert.assertTrue( rep.getExpersion() instanceof LongRange );
+        Assert.assertEquals( 3 , rep.getMinimumLength() );
+        Assert.assertEquals( 7 , rep.getMaximumLength() );
+
+        Iterator<LongTerminal> it = ((LongRange) rep.getExpersion()).iterator();
+
+        Long num = new Long(10);
+        while (it.hasNext()){
+            Assert.assertEquals(num,it.next().getValue());
+            ++num;
+        }
+        Assert.assertEquals(--num , new Long(99));
+    }
+
+    @Test
+    public void test17() throws ParseException {
+
+        String input = "REP(REP([Hello|World|EasyGen],2),3)";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpersion seqExp = parser.parse();
+        List<Expersion> expList = seqExp.getExpersions();
+        Assert.assertEquals(1, expList.size());
+        Assert.assertTrue( expList.get(0) instanceof Rep);
+
+        Assert.assertEquals(1, expList.size());
+        Assert.assertTrue( expList.get(0) instanceof Rep);
+
+        Rep outerRep = (Rep)expList.get(0);
+        Assert.assertTrue( outerRep.getExpersion() instanceof Rep );
+        Assert.assertEquals(3, outerRep.getMinimumLength());
+        Assert.assertEquals(3, outerRep.getMaximumLength() );
+
+        Rep innerRep = (Rep)outerRep.getExpersion();
+        Assert.assertTrue( innerRep.getExpersion() instanceof StringRange );
+        Assert.assertEquals(2, innerRep.getMinimumLength());
+        Assert.assertEquals(2, innerRep.getMaximumLength() );
+
+        Iterator<StringTerminal> it = ((StringRange)innerRep.getExpersion()).iterator();
+        String[] words = new String[] {"Hello","World","EasyGen"};
+        int i=0;
+
+        while (it.hasNext()){
+            Assert.assertEquals( words[i] , it.next().getValue() );
+            ++i;
+        }
+    }
+
+    @Test
+    public void test18() throws ParseException {
+
+        String input = "DATE()";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpersion seqExp = parser.parse();
+        List<Expersion> expList = seqExp.getExpersions();
+        Assert.assertEquals(1, expList.size());
+        Assert.assertTrue(expList.get(0) instanceof Date);
+    }
+
+    @Test
+    public void test19() throws ParseException {
+
+        String input = "DATE(yyyy-MM-dd)";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpersion seqExp = parser.parse();
+        List<Expersion> expList = seqExp.getExpersions();
+        Assert.assertEquals(1, expList.size());
+        Assert.assertTrue(expList.get(0) instanceof Date);
+    }
+
+    @Test
+    public void test20() throws ParseException {
+
+        String input = "Hello NEW_LINE() Bye";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpersion seqExp = parser.parse();
+        List<Expersion> expList = seqExp.getExpersions();
+        Assert.assertEquals(3, expList.size());
+        Assert.assertTrue(expList.get(0) instanceof StringTerminal);
+        Assert.assertTrue(expList.get(1) instanceof Newline);
+        Assert.assertTrue(expList.get(2) instanceof StringTerminal);
+        String output = seqExp.generate();
+        String[] split = output.split(System.lineSeparator());
+        Assert.assertTrue( split.length == 2 );
+        Assert.assertEquals( "Hello" , split[0] );
+        Assert.assertEquals( "Bye" , split[1] );
+    }
 
 }

@@ -92,7 +92,7 @@ public class Lexer {
             throw new Error("expected " + expected + " but found " + c );
     }
 
-    public boolean tryMatch(char expected){
+    public boolean tryMatchThenConsume(char expected){
         if( c == expected ) {
             consume();
             return true;
@@ -233,16 +233,19 @@ public class Lexer {
 
         while ( true ){
 
-            if( c==EOF || c=='[' || c==']' || c==')' || c=='|' || isWhitespace() )
+            if( c==EOF || c=='[' || c==']' || c==')' || c=='|' || c==',' )
                 break;
 
-            if( c=='(' ){
-                if( FunctionTables.isAFunction(sb.toString()) ){
-                    currentToken = new Token(sb.toString(),Token.Type.FUNCTION);
-                    return currentToken;
-                }
+            if( (c == '(' && FunctionTables.isAFunction(sb.toString()))
+                    ||
+                isWhitespace() && isLookaheadIgnoreWhitespace('(')
+              ){
+                currentToken = new Token(sb.toString(),Token.Type.FUNCTION);
+                return currentToken;
             }
 
+            if( isWhitespace() )
+                break;
             if( c=='.' && isLookahead('.') ){
                 break;
             }

@@ -27,6 +27,18 @@ public class Rep extends Expersion {
         this.maximumLength = maximumLength;
     }
 
+    public Expersion getExpersion() {
+        return expersion;
+    }
+
+    public int getMinimumLength() {
+        return minimumLength;
+    }
+
+    public int getMaximumLength() {
+        return maximumLength;
+    }
+
     @Override
     public String generate() {
 

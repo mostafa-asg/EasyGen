@@ -1,5 +1,10 @@
 package com.github.generator.parser;
 
+import com.github.generator.expersions.Expersion;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author Mostafa Asgari
  * @since 2/20/17
@@ -7,7 +12,11 @@ package com.github.generator.parser;
 public class FunctionTables {
 
     private static String[] functions = new String[] {
-        "REP" , "PAD_LEFT" , "PAD_RIGHT"
+            ParserProvider.REP ,
+            ParserProvider.PAD_LEFT ,
+            ParserProvider.PAD_RIGHT ,
+            ParserProvider.NEW_LINE ,
+            ParserProvider.DATE
     };
 
     public static boolean isAFunction(String functionName){

@@ -40,6 +40,9 @@ public class Token {
     public Long getValueAsLong(){
         return Long.valueOf(value);
     }
+    public Integer getValueAsInt(){
+        return Integer.valueOf(value);
+    }
 
     public char getValueAsChar(){
         if( value.length() != 1 ){
