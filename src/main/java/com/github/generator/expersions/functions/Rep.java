@@ -50,7 +50,6 @@ public class Rep extends Expersion {
         if( this.minimumLength != this.maximumLength ) {
             Random rnd = new Random();
             length = rnd.nextInt( (maximumLength-minimumLength+1) ) + minimumLength;
-            start = minimumLength;
         }
 
         for(int i=start;i<=length;i++){
