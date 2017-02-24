@@ -92,7 +92,7 @@ public class Lexer {
             throw new Error("expected " + expected + " but found " + c );
     }
 
-    public boolean tryMatchThenConsume(char expected){
+    public boolean tryMatch(char expected){
         if( c == expected ) {
             consume();
             return true;

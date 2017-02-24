@@ -15,8 +15,7 @@ public class RepParser extends AbstractParser {
     @Override
     public Expersion parse() throws ParseException {
 
-        if( lexer.nextToken().getType() != Token.Type.L_PARENTHESE )
-            throw new ParseException();
+        ensureNextTokenIs(Token.Type.L_PARENTHESE);
 
         Expersion firstParam = null;
 
@@ -28,24 +27,16 @@ public class RepParser extends AbstractParser {
             firstParam = ParserProvider.getParser( token.getValue() ).parse();
         }
 
-        if( lexer.nextToken().getType() != Token.Type.COMMA )
-            throw new ParseException();
+        ensureNextTokenIs(Token.Type.COMMA);
 
-        Token secondParam = lexer.nextToken();
-        if( secondParam.getType() != Token.Type.NUMBER ){
-            throw new ParseException();
-        }
+        Token secondParam = ensureNextTokenIs(Token.Type.NUMBER);
 
         Token thirdParam = null;
-        if( lexer.tryMatchThenConsume(',') ){
-            thirdParam = lexer.nextToken();
-            if( thirdParam.getType() != Token.Type.NUMBER ){
-                throw new ParseException();
-            }
+        if( lexer.tryMatch(',') ){
+            thirdParam = ensureNextTokenIs(Token.Type.NUMBER);
         }
 
-        if( lexer.nextToken().getType() != Token.Type.R_PARENTHESE )
-            throw new ParseException();
+        ensureNextTokenIs(Token.Type.R_PARENTHESE);
 
         if(thirdParam==null)
             return new Rep( firstParam , secondParam.getValueAsInt() );

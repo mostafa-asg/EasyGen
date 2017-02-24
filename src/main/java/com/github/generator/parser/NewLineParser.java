@@ -15,11 +15,8 @@ public class NewLineParser extends AbstractParser {
     @Override
     public Expersion parse() throws ParseException {
 
-        if( lexer.nextToken().getType() != Token.Type.L_PARENTHESE )
-            throw new ParseException();
-
-        if( lexer.nextToken().getType() != Token.Type.R_PARENTHESE )
-            throw new ParseException();
+        ensureNextTokenIs(Token.Type.L_PARENTHESE);
+        ensureNextTokenIs(Token.Type.R_PARENTHESE);
 
         return new Newline();
 

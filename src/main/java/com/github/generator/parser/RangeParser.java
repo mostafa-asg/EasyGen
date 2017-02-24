@@ -39,30 +39,18 @@ public class RangeParser extends AbstractParser {
             firstParam = lexer.nextToken();
 
             if (firstParam.getType() == Token.Type.NUMBER) {
-                if (lexer.nextToken().getType() != Token.Type.DOUBLE_DOT)
-                    throw new ParseException();
 
-                Token secondParam = lexer.nextToken();
-
-                if (secondParam.getType() != Token.Type.NUMBER)
-                    throw new ParseException();
-
-                if (lexer.nextToken().getType() != Token.Type.R_BRACKET)
-                    throw new ParseException();
+                ensureNextTokenIs( Token.Type.DOUBLE_DOT );
+                Token secondParam = ensureNextTokenIs(Token.Type.NUMBER);
+                ensureNextTokenIs( Token.Type.R_BRACKET);
 
                 return new LongRange(firstParam.getValueAsLong(), secondParam.getValueAsLong());
             }
             else  if (firstParam.getType() == Token.Type.CHAR) {
-                if (lexer.nextToken().getType() != Token.Type.DOUBLE_DOT)
-                    throw new ParseException();
 
-                Token secondParam = lexer.nextToken();
-
-                if (secondParam.getType() != Token.Type.CHAR)
-                    throw new ParseException();
-
-                if (lexer.nextToken().getType() != Token.Type.R_BRACKET)
-                    throw new ParseException();
+                ensureNextTokenIs( Token.Type.DOUBLE_DOT );
+                Token secondParam = ensureNextTokenIs(Token.Type.CHAR);
+                ensureNextTokenIs( Token.Type.R_BRACKET);
 
                 return new CharRange(firstParam.getValueAsChar(), secondParam.getValueAsChar());
             }
@@ -76,17 +64,14 @@ public class RangeParser extends AbstractParser {
         StringRange result = new StringRange();
         result.addItem( new StringTerminal(readString()) );
 
-        if(lexer.nextToken().getType() != Token.Type.PIPE){
-            throw new ParseException();
-        }
+        ensureNextTokenIs(Token.Type.PIPE);
         result.addItem( new StringTerminal(readString()) );
 
         while (lexer.nextToken().getType() == Token.Type.PIPE){
             result.addItem( new StringTerminal(readString()) );
         }
 
-        if( lexer.getCurrentToken().getType() != Token.Type.R_BRACKET )
-            throw new ParseException();
+        ensureCurrentTokenIs(Token.Type.R_BRACKET);
 
         return result;
     }

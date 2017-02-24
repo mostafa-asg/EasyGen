@@ -14,16 +14,14 @@ public class DateParser extends AbstractParser {
 
     @Override
     public Expersion parse() throws ParseException {
-        if( lexer.nextToken().getType() != Token.Type.L_PARENTHESE )
-            throw new ParseException();
+       ensureNextTokenIs(Token.Type.L_PARENTHESE);
 
         Token token = lexer.nextToken();
         if( token.getType() == Token.Type.STRING ){
 
             String parameter = token.getValue();
 
-            if( lexer.nextToken().getType() != Token.Type.R_PARENTHESE )
-                throw new ParseException();
+            ensureNextTokenIs(Token.Type.R_PARENTHESE);
 
             return new Date(parameter);
         }
