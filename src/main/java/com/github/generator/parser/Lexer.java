@@ -1,5 +1,7 @@
 package com.github.generator.parser;
 
+import java.util.Stack;
+
 /**
  * @author Mostafa Asgari
  * @since 2/19/17
@@ -70,7 +72,34 @@ public class Lexer {
         }
 
         return sb.toString();
+    }
 
+    public int findFirstCommaPosition(){
+        Stack<Character> stack = new Stack<Character>();
+
+        while (true){
+
+            if( c == '\'' ){
+                readSingleQuoteString();
+                continue;
+            }
+            else if ( c == '(' ){
+                stack.push('(');
+            }
+            else if ( c == ')' ){
+                if( stack.size() > 0 )
+                    stack.pop();
+            }
+            else if ( c==',' ){
+                if( stack.size() == 0 )
+                    return pos;
+            }
+
+            consume();
+
+            if( c==EOF )
+                throw new Error("reach end of file");
+        }
     }
 
     public String consumeUntil(char untilChar){
@@ -207,6 +236,10 @@ public class Lexer {
 
         currentToken = new Token("EOF", Token.Type.EOF);
         return currentToken;
+    }
+
+    public String substring(int beginIndex,int endIndex){
+        return input.substring(beginIndex,endIndex);
     }
 
     private void whitespace(){

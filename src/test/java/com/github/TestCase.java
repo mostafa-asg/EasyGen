@@ -433,11 +433,12 @@ public class TestCase {
         Assert.assertTrue( expList.get(0) instanceof Rep);
 
         Rep rep = (Rep)expList.get(0);
-        Assert.assertTrue( rep.getExpersion() instanceof CharRange );
+        Assert.assertTrue( rep.getExpersion() instanceof SequenceExpersion );
+
         Assert.assertEquals( 34 , rep.getMinimumLength() );
         Assert.assertEquals(34, rep.getMaximumLength());
 
-        Iterator<CharTerminal> it = ((CharRange) rep.getExpersion()).iterator();
+        Iterator<CharTerminal> it = ((CharRange)((SequenceExpersion)rep.getExpersion()).getExpersions().get(0)).iterator();
         char ch = 'a';
         while (it.hasNext()){
             Assert.assertTrue( it.next().getValue()==ch );
@@ -460,11 +461,11 @@ public class TestCase {
         Assert.assertTrue( expList.get(0) instanceof Rep);
 
         Rep rep = (Rep)expList.get(0);
-        Assert.assertTrue( rep.getExpersion() instanceof LongRange );
+        Assert.assertTrue( rep.getExpersion() instanceof SequenceExpersion );
         Assert.assertEquals( 3 , rep.getMinimumLength() );
         Assert.assertEquals( 7 , rep.getMaximumLength() );
 
-        Iterator<LongTerminal> it = ((LongRange) rep.getExpersion()).iterator();
+        Iterator<LongTerminal> it = ((LongRange)((SequenceExpersion)rep.getExpersion()).getExpersions().get(0)).iterator();
 
         Long num = new Long(10);
         while (it.hasNext()){
@@ -486,20 +487,17 @@ public class TestCase {
         Assert.assertEquals(1, expList.size());
         Assert.assertTrue( expList.get(0) instanceof Rep);
 
-        Assert.assertEquals(1, expList.size());
-        Assert.assertTrue( expList.get(0) instanceof Rep);
-
         Rep outerRep = (Rep)expList.get(0);
-        Assert.assertTrue( outerRep.getExpersion() instanceof Rep );
+        Assert.assertTrue( outerRep.getExpersion() instanceof SequenceExpersion );
         Assert.assertEquals(3, outerRep.getMinimumLength());
         Assert.assertEquals(3, outerRep.getMaximumLength() );
 
-        Rep innerRep = (Rep)outerRep.getExpersion();
-        Assert.assertTrue( innerRep.getExpersion() instanceof StringRange );
+        Rep innerRep = (Rep) ((SequenceExpersion)outerRep.getExpersion()).getExpersions().get(0);
+        Assert.assertTrue( innerRep.getExpersion() instanceof SequenceExpersion );
         Assert.assertEquals(2, innerRep.getMinimumLength());
         Assert.assertEquals(2, innerRep.getMaximumLength() );
 
-        Iterator<StringTerminal> it = ((StringRange)innerRep.getExpersion()).iterator();
+        Iterator<StringTerminal> it = ((StringRange) ((SequenceExpersion)innerRep.getExpersion()).getExpersions().get(0)).iterator();
         String[] words = new String[] {"Hello","World","EasyGen"};
         int i=0;
 
@@ -684,5 +682,15 @@ public class TestCase {
         }
     }
 
+    @Test
+    public void test26() throws ParseException {
+
+        String input = "REP( DATE() NEW_LINE() , 3 )";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpersion seqExp = parser.parse();
+        System.out.println( seqExp.generate() );
+    }
 
 }

@@ -19,13 +19,18 @@ public class RepParser extends AbstractParser {
 
         Expersion firstParam = null;
 
-        Token token = lexer.nextToken();
-        if( token.getType() == Token.Type.L_BRACKET ){
-            firstParam = ParserProvider.getParser( ParserProvider.RANGE ).parse();
-        }
-        else if (token.getType() == Token.Type.FUNCTION){
-            firstParam = ParserProvider.getParser( token.getValue() ).parse();
-        }
+        int tempPos = lexer.getCurrentPosition();
+        int nextCommaPos = lexer.findFirstCommaPosition();
+
+        String newInput = lexer.substring(tempPos,nextCommaPos);
+        firstParam = new Parser(new Lexer(newInput)).parse();
+//        Token token = lexer.nextToken();
+//        if( token.getType() == Token.Type.L_BRACKET ){
+//            firstParam = ParserProvider.getParser( ParserProvider.RANGE ).parse();
+//        }
+//        else if (token.getType() == Token.Type.FUNCTION){
+//            firstParam = ParserProvider.getParser( token.getValue() ).parse();
+//        }
 
         ensureNextTokenIs(Token.Type.COMMA);
 
