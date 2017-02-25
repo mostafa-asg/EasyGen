@@ -23,7 +23,10 @@ public class Lexer {
 
     public void seek(int newPos){
         pos = newPos;
-        c = input.charAt(pos);
+        if( pos >= input.length() )
+            c = EOF;
+        else
+            c = input.charAt(pos);
     }
 
     public int getCurrentPosition(){
@@ -150,6 +153,14 @@ public class Lexer {
                 case ' ': case '\t': case '\n': case '\r':
                     whitespace();
                     continue;
+                case '+':
+                    consume();
+                    currentToken = new Token("+",Token.Type.PLUS);
+                    return currentToken;
+                case '-':
+                    consume();
+                    currentToken = new Token("-",Token.Type.MINUS);
+                    return currentToken;
                 case ',':
                     consume();
                     currentToken = new Token(",", Token.Type.COMMA);

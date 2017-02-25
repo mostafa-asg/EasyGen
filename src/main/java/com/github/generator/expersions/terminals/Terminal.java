@@ -26,4 +26,20 @@ public abstract class Terminal<T> extends Expersion {
     public String toString() {
         return generate();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Terminal<?> terminal1 = (Terminal<?>) o;
+
+        return this.terminal != null ? terminal.equals(terminal1.terminal) : terminal1.terminal == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return terminal != null ? terminal.hashCode() : 0;
+    }
 }

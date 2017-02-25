@@ -17,6 +17,7 @@ import com.github.generator.parser.Parser;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -553,5 +554,135 @@ public class TestCase {
         Assert.assertEquals( "Hello" , split[0] );
         Assert.assertEquals( "Bye" , split[1] );
     }
+
+    @Test
+    public void test21() throws ParseException {
+
+        String input = "[1..5]+[10..15]";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpersion seqExp = parser.parse();
+        List<Expersion> expList = seqExp.getExpersions();
+        Assert.assertEquals(1, expList.size());
+        Assert.assertTrue( expList.get(0) instanceof LongRange );
+
+        Iterator<LongTerminal> it = ((LongRange)expList.get(0)).iterator();
+        Long num = new Long(1);
+        while (it.hasNext()){
+            Assert.assertEquals(num,it.next().getValue());
+            ++num;
+            if( num == 6L )
+                num = 10L;
+        }
+        Assert.assertEquals(new Long(15) , --num);
+
+    }
+
+    @Test
+    public void test22() throws ParseException {
+
+        String input = "[1..20]-[12..15]";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpersion seqExp = parser.parse();
+        List<Expersion> expList = seqExp.getExpersions();
+        Assert.assertEquals(1, expList.size());
+        Assert.assertTrue( expList.get(0) instanceof LongRange );
+
+        Iterator<LongTerminal> it = ((LongRange)expList.get(0)).iterator();
+        Long num = new Long(1);
+        while (it.hasNext()){
+            Assert.assertEquals(num,it.next().getValue());
+            ++num;
+            if( num == 12L )
+                num = 16L;
+        }
+        Assert.assertEquals(new Long(20) , --num);
+    }
+
+    @Test
+    public void test23() throws ParseException {
+
+        String input = "[1..5]+[10..15]-[5..10]";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpersion seqExp = parser.parse();
+        List<Expersion> expList = seqExp.getExpersions();
+        Assert.assertEquals(1, expList.size());
+        Assert.assertTrue( expList.get(0) instanceof LongRange );
+
+        Iterator<LongTerminal> it = ((LongRange)expList.get(0)).iterator();
+        Long num = new Long(1);
+        while (it.hasNext()){
+            Assert.assertEquals(num,it.next().getValue());
+            ++num;
+            if( num == 5L )
+                num = 11L;
+        }
+        Assert.assertEquals(new Long(15) , --num);
+
+    }
+
+    @Test
+    public void test24() throws ParseException {
+
+        String input = "[a..z]+[A..Z]";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpersion seqExp = parser.parse();
+        List<Expersion> expList = seqExp.getExpersions();
+        Assert.assertEquals(1, expList.size());
+        Assert.assertTrue( expList.get(0) instanceof CharRange );
+
+        Iterator<CharTerminal> it = ((CharRange)expList.get(0)).iterator();
+        char ch = 'a';
+        while (it.hasNext()){
+            Assert.assertEquals(new Character(ch),it.next().getValue());
+            ++ch;
+            if( ch == ('z'+1) )
+                ch = 'A';
+        }
+        Assert.assertEquals( new Character('Z') , new Character(--ch));
+    }
+
+    @Test
+    public void test25() throws ParseException {
+
+        String input = "[a..z]+[A..Z]-[b..d]-[X..Z]";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpersion seqExp = parser.parse();
+        List<Expersion> expList = seqExp.getExpersions();
+        Assert.assertEquals(1, expList.size());
+        Assert.assertTrue( expList.get(0) instanceof CharRange );
+
+        Iterator<CharTerminal> it = ((CharRange)expList.get(0)).iterator();
+
+        List<Character> lstChar = new ArrayList<Character>();
+        for( char ch= 'a';ch<='z';++ch ){
+            lstChar.add( ch );
+        }
+        for( char ch= 'A';ch<='Z';++ch ){
+            lstChar.add( ch );
+        }
+        lstChar.remove(new Character('b'));
+        lstChar.remove(new Character('c'));
+        lstChar.remove(new Character('d'));
+        lstChar.remove(new Character('X'));
+        lstChar.remove(new Character('Y'));
+        lstChar.remove(new Character('Z'));
+
+        int i = 0;
+        while (it.hasNext()){
+            Assert.assertEquals(lstChar.get(i),it.next().getValue());
+            ++i;
+        }
+    }
+
 
 }
