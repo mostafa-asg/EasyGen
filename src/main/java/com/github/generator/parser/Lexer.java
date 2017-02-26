@@ -153,11 +153,11 @@ public class Lexer {
 
         int tempPos = pos+1;
 
-        if(tempPos+1 >= input.length())
+        if(tempPos >= input.length())
             return false;
 
         char c = input.charAt(tempPos);
-        while ( isWhitespace() ){
+        while ( isWhitespace(c) ){
             ++tempPos;
 
             if( tempPos>=input.length() )
@@ -248,6 +248,9 @@ public class Lexer {
     }
 
     private boolean isWhitespace(){
+        return isWhitespace(c);
+    }
+    private boolean isWhitespace(char c){
         if( c==' ' || c=='\t' || c=='\n' || c=='\r' )
             return true;
 
