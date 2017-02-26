@@ -24,7 +24,7 @@ public class FileSinkParser extends AbstractParser {
         firstParam = new Parser(new Lexer(newInput)).parse();
 
         ensureNextTokenIs(Token.Type.COMMA);
-        Token filePathToken = ensureCurrentTokenIs(Token.Type.STRING);
+        Token filePathToken = ensureNextTokenIs(Token.Type.STRING);
 
         ensureNextTokenIs(Token.Type.COMMA);
         Token appendToken = ensureNextTokenIs(Token.Type.STRING);
