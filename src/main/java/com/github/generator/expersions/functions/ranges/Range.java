@@ -73,7 +73,7 @@ public abstract class Range<T extends Terminal> extends Expersion implements Ite
     }
 
     @Override
-    public String generate() {
+    public String generate() throws Exception {
         return getRandom().generate();
     }
 }

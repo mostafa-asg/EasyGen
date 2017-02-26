@@ -17,6 +17,7 @@ public class ParserProvider {
     public final static String DATE = "DATE";
     public final static String PAD_LEFT = "PAD_LEFT";
     public final static String PAD_RIGHT = "PAD_RIGHT";
+    public final static String FILE = "FILE";
     public final static String RANGE = "range";
 
     public static void init(Lexer lexer){
@@ -25,6 +26,7 @@ public class ParserProvider {
         parsers.put(NEW_LINE, new NewLineParser(lexer));
         parsers.put(DATE, new DateParser(lexer));
         parsers.put(RANGE, new RangeParser(lexer));
+        parsers.put(FILE , new FileSinkParser(lexer));
     }
 
     public static IParser getParser(String parserName){

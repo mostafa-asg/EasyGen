@@ -12,7 +12,6 @@ import com.github.generator.expersions.terminals.CharTerminal;
 import com.github.generator.expersions.terminals.LongTerminal;
 import com.github.generator.expersions.terminals.StringTerminal;
 import com.github.generator.parser.Lexer;
-import com.github.generator.parser.ParseException;
 import com.github.generator.parser.Parser;
 import org.junit.Assert;
 import org.junit.Test;
@@ -29,7 +28,7 @@ import java.util.List;
 public class TestCase {
 
     @Test
-    public void test1() throws ParseException {
+    public void test1() throws Exception {
 
         String input = "Hello[1..100]";
         Lexer lexer = new Lexer(input);
@@ -60,7 +59,7 @@ public class TestCase {
     }
 
     @Test
-    public void test2() throws ParseException {
+    public void test2() throws Exception {
 
         String input = "[120..140]Hello";
         Lexer lexer = new Lexer(input);
@@ -91,7 +90,7 @@ public class TestCase {
     }
 
     @Test
-    public void test3() throws ParseException {
+    public void test3() throws Exception {
 
         String input = "[100..119]Hello[5..9]";
         Lexer lexer = new Lexer(input);
@@ -133,7 +132,7 @@ public class TestCase {
     }
 
     @Test
-    public void test4() throws ParseException {
+    public void test4() throws Exception {
 
         String input = "[0..43]";
         Lexer lexer = new Lexer(input);
@@ -156,7 +155,7 @@ public class TestCase {
     }
 
     @Test
-    public void test5() throws ParseException {
+    public void test5() throws Exception {
 
         String input = "[a..z]";
         Lexer lexer = new Lexer(input);
@@ -180,7 +179,7 @@ public class TestCase {
     }
 
     @Test
-    public void test6() throws ParseException {
+    public void test6() throws Exception {
 
         String input = "[a..c][d..g]";
         Lexer lexer = new Lexer(input);
@@ -213,7 +212,7 @@ public class TestCase {
     }
 
     @Test
-    public void test7() throws ParseException {
+    public void test7() throws Exception {
 
         String input = "[a..c][1..5][d..g][666..777]";
         Lexer lexer = new Lexer(input);
@@ -270,7 +269,7 @@ public class TestCase {
     }
 
     @Test
-    public void test8() throws ParseException {
+    public void test8() throws Exception {
         String input = "This is a sentence[A..Z].And this is another[1..7] sentence";
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
@@ -304,7 +303,7 @@ public class TestCase {
     }
 
     @Test
-    public void test9() throws ParseException {
+    public void test9() throws Exception {
         String input = "[Hello|World|Bye]";
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
@@ -326,7 +325,7 @@ public class TestCase {
     }
 
     @Test
-    public void test10() throws ParseException {
+    public void test10() throws Exception {
         String input = "[Hello|World]";
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
@@ -348,7 +347,7 @@ public class TestCase {
     }
 
     @Test
-    public void test11() throws ParseException {
+    public void test11() throws Exception {
         String input = "[Hello|'Hello World.This is a test'|World|'another world']";
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
@@ -370,7 +369,7 @@ public class TestCase {
     }
 
     @Test
-    public void test12() throws ParseException {
+    public void test12() throws Exception {
         String input = "['Hello|World|This|is|a|test'|World|'another world']";
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
@@ -392,7 +391,7 @@ public class TestCase {
     }
 
     @Test
-    public void test13() throws ParseException {
+    public void test13() throws Exception {
         String input = "'Hello World REP([a..z],6)'";
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
@@ -406,7 +405,7 @@ public class TestCase {
     }
 
     @Test
-    public void test14() throws ParseException {
+    public void test14() throws Exception {
         String input = "'REP([a..z],6)'";
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
@@ -420,7 +419,7 @@ public class TestCase {
     }
 
     @Test
-    public void test15() throws ParseException{
+    public void test15() throws Exception{
 
         String input = "REP([a..z],34)";
         Lexer lexer = new Lexer(input);
@@ -448,7 +447,7 @@ public class TestCase {
     }
 
     @Test
-    public void test16() throws ParseException{
+    public void test16() throws Exception{
 
         String input = "REP([10..99],3,7)";
         Lexer lexer = new Lexer(input);
@@ -476,7 +475,7 @@ public class TestCase {
     }
 
     @Test
-    public void test17() throws ParseException {
+    public void test17() throws Exception {
 
         String input = "REP(REP([Hello|World|EasyGen],2),3)";
         Lexer lexer = new Lexer(input);
@@ -508,7 +507,7 @@ public class TestCase {
     }
 
     @Test
-    public void test18() throws ParseException {
+    public void test18() throws Exception {
 
         String input = "DATE()";
         Lexer lexer = new Lexer(input);
@@ -521,7 +520,7 @@ public class TestCase {
     }
 
     @Test
-    public void test19() throws ParseException {
+    public void test19() throws Exception {
 
         String input = "DATE(yyyy-MM-dd)";
         Lexer lexer = new Lexer(input);
@@ -534,7 +533,7 @@ public class TestCase {
     }
 
     @Test
-    public void test20() throws ParseException {
+    public void test20() throws Exception {
 
         String input = "Hello NEW_LINE() Bye";
         Lexer lexer = new Lexer(input);
@@ -554,7 +553,7 @@ public class TestCase {
     }
 
     @Test
-    public void test21() throws ParseException {
+    public void test21() throws Exception {
 
         String input = "[1..5]+[10..15]";
         Lexer lexer = new Lexer(input);
@@ -578,7 +577,7 @@ public class TestCase {
     }
 
     @Test
-    public void test22() throws ParseException {
+    public void test22() throws Exception {
 
         String input = "[1..20]-[12..15]";
         Lexer lexer = new Lexer(input);
@@ -601,7 +600,7 @@ public class TestCase {
     }
 
     @Test
-    public void test23() throws ParseException {
+    public void test23() throws Exception {
 
         String input = "[1..5]+[10..15]-[5..10]";
         Lexer lexer = new Lexer(input);
@@ -625,7 +624,7 @@ public class TestCase {
     }
 
     @Test
-    public void test24() throws ParseException {
+    public void test24() throws Exception {
 
         String input = "[a..z]+[A..Z]";
         Lexer lexer = new Lexer(input);
@@ -648,7 +647,7 @@ public class TestCase {
     }
 
     @Test
-    public void test25() throws ParseException {
+    public void test25() throws Exception {
 
         String input = "[a..z]+[A..Z]-[b..d]-[X..Z]";
         Lexer lexer = new Lexer(input);
@@ -683,14 +682,25 @@ public class TestCase {
     }
 
     @Test
-    public void test26() throws ParseException {
+    public void test26() throws Exception {
 
         String input = "REP( DATE() NEW_LINE() , 3 )";
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
         SequenceExpersion seqExp = parser.parse();
-        System.out.println( seqExp.generate() );
+        List<Expersion> expList = seqExp.getExpersions();
+        Assert.assertEquals(1, expList.size());
+        Assert.assertTrue( expList.get(0) instanceof Rep );
+
+        Assert.assertTrue( ((Rep)expList.get(0)).getExpersion() instanceof SequenceExpersion );
+        SequenceExpersion repFirstExp = (SequenceExpersion)((Rep)expList.get(0)).getExpersion();
+        Assert.assertEquals(2 , repFirstExp.getExpersions().size());
+        Assert.assertTrue( repFirstExp.getExpersions().get(0) instanceof Date );
+        Assert.assertTrue( repFirstExp.getExpersions().get(1) instanceof Newline );
+        Assert.assertEquals( 3 , ((Rep)expList.get(0)).getMinimumLength() );
+        Assert.assertEquals( 3 , ((Rep)expList.get(0)).getMaximumLength() );
+
     }
 
 }

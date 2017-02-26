@@ -20,7 +20,7 @@ public class SequenceExpersion extends Expersion {
     }
 
     @Override
-    public String generate() {
+    public String generate() throws Exception {
 
         StringBuilder sb = new StringBuilder();
 

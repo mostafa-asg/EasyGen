@@ -1,46 +1,36 @@
 package com.github.generator.parser;
 
 import com.github.generator.expersions.Expersion;
-import com.github.generator.expersions.functions.Rep;
+import com.github.generator.expersions.sink.FileSink;
 
 /**
- * Created by Mostafa on 02/23/2017.
+ * @author Mostafa Asgari
+ * @since 2/26/17
  */
-public class RepParser extends AbstractParser {
+public class FileSinkParser extends AbstractParser {
 
-    public RepParser(Lexer lexer) {
+    public FileSinkParser(Lexer lexer) {
         super(lexer);
     }
 
-    @Override
     public Expersion parse() throws ParseException {
 
         ensureNextTokenIs(Token.Type.L_PARENTHESE);
 
         Expersion firstParam = null;
-
         int tempPos = lexer.getCurrentPosition();
         int nextCommaPos = lexer.findFirstCommaPosition();
-
         String newInput = lexer.substring(tempPos,nextCommaPos);
         firstParam = new Parser(new Lexer(newInput)).parse();
 
         ensureNextTokenIs(Token.Type.COMMA);
+        Token filePathToken = ensureCurrentTokenIs(Token.Type.STRING);
 
-        Token secondParam = ensureNextTokenIs(Token.Type.NUMBER);
-
-        Token thirdParam = null;
-        if( lexer.tryMatch(',') ){
-            thirdParam = ensureNextTokenIs(Token.Type.NUMBER);
-        }
+        ensureNextTokenIs(Token.Type.COMMA);
+        Token appendToken = ensureNextTokenIs(Token.Type.STRING);
 
         ensureNextTokenIs(Token.Type.R_PARENTHESE);
 
-        if(thirdParam==null)
-            return new Rep( firstParam , secondParam.getValueAsInt() );
-        else
-            return new Rep( firstParam , secondParam.getValueAsInt() , thirdParam.getValueAsInt() );
-
+        return new FileSink(firstParam , filePathToken.getValue() , appendToken.getValueAsBoolean());
     }
-
 }

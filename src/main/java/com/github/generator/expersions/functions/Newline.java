@@ -8,7 +8,7 @@ import com.github.generator.expersions.Expersion;
 public class Newline extends Expersion {
 
     @Override
-    public String generate() {
+    public String generate() throws Exception {
         return System.lineSeparator();
     }
 

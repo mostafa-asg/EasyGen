@@ -18,7 +18,7 @@ public class PadRight extends Expersion {
     }
 
     @Override
-    public String generate() {
+    public String generate() throws Exception {
 
         String value = expersion.generate();
 

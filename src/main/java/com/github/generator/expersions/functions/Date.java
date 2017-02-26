@@ -20,7 +20,7 @@ public class Date extends Expersion {
     }
 
     @Override
-    public String generate() {
+    public String generate() throws Exception {
         return dateFormat.format(new java.util.Date());
     }
 }

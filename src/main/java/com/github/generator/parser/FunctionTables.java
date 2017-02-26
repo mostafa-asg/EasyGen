@@ -16,7 +16,9 @@ public class FunctionTables {
             ParserProvider.PAD_LEFT ,
             ParserProvider.PAD_RIGHT ,
             ParserProvider.NEW_LINE ,
-            ParserProvider.DATE
+            ParserProvider.DATE ,
+
+            ParserProvider.FILE
     };
 
     public static boolean isAFunction(String functionName){

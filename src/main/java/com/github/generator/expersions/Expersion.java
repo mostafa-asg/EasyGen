@@ -5,10 +5,6 @@ package com.github.generator.expersions;
  */
 public abstract class Expersion {
 
-    public abstract String generate();
+    public abstract String generate() throws Exception;
 
-    @Override
-    public String toString() {
-        return generate();
-    }
 }

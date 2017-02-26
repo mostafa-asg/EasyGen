@@ -51,6 +51,10 @@ public class Token {
         return value.charAt(0);
     }
 
+    public boolean getValueAsBoolean(){
+        return Boolean.parseBoolean(value);
+    }
+
     public Type getType() {
         return type;
     }
