@@ -703,4 +703,28 @@ public class TestCase {
 
     }
 
+    @Test
+    public void test27() throws Exception {
+
+        String input = "REP( DATE() ',He,ll,o Wor,ld,' NEW_LINE() , 3 )";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpersion seqExp = parser.parse();
+        List<Expersion> expList = seqExp.getExpersions();
+        Assert.assertEquals(1, expList.size());
+        Assert.assertTrue( expList.get(0) instanceof Rep );
+
+        Assert.assertTrue( ((Rep)expList.get(0)).getExpersion() instanceof SequenceExpersion );
+        SequenceExpersion repFirstExp = (SequenceExpersion)((Rep)expList.get(0)).getExpersion();
+        Assert.assertEquals(3 , repFirstExp.getExpersions().size());
+        Assert.assertTrue( repFirstExp.getExpersions().get(0) instanceof Date );
+        Assert.assertTrue( repFirstExp.getExpersions().get(1) instanceof StringTerminal );
+        Assert.assertEquals( ",He,ll,o Wor,ld," , ((StringTerminal)repFirstExp.getExpersions().get(1)).getValue() );
+        Assert.assertTrue( repFirstExp.getExpersions().get(2) instanceof Newline );
+        Assert.assertEquals( 3 , ((Rep)expList.get(0)).getMinimumLength() );
+        Assert.assertEquals( 3 , ((Rep)expList.get(0)).getMaximumLength() );
+
+    }
+
 }

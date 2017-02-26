@@ -80,6 +80,7 @@ public class Lexer {
         while (true){
 
             if( c == '\'' ){
+                consume();
                 readSingleQuoteString();
                 continue;
             }
