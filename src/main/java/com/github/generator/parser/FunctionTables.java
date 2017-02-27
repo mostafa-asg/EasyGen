@@ -17,6 +17,7 @@ public class FunctionTables {
             ParserProvider.PAD_RIGHT ,
             ParserProvider.NEW_LINE ,
             ParserProvider.DATE ,
+            ParserProvider.TAB ,
 
             ParserProvider.FILE
     };

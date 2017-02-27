@@ -12,13 +12,14 @@ public class ParserProvider {
 
     private static Map<String,IParser> parsers;
 
-    public final static String REP = "REP";
-    public final static String NEW_LINE = "NEW_LINE";
-    public final static String DATE = "DATE";
-    public final static String PAD_LEFT = "PAD_LEFT";
-    public final static String PAD_RIGHT = "PAD_RIGHT";
-    public final static String FILE = "FILE";
-    public final static String RANGE = "range";
+    public static final String REP = "REP";
+    public static final String NEW_LINE = "NEW_LINE";
+    public static final String DATE = "DATE";
+    public static final String PAD_LEFT = "PAD_LEFT";
+    public static final String PAD_RIGHT = "PAD_RIGHT";
+    public static final String TAB = "TAB";
+    public static final String FILE = "FILE";
+    public static final String RANGE = "range";
 
     public static void init(Lexer lexer){
         parsers = new HashMap<String, IParser>();
@@ -27,6 +28,7 @@ public class ParserProvider {
         parsers.put(DATE, new DateParser(lexer));
         parsers.put(RANGE, new RangeParser(lexer));
         parsers.put(FILE , new FileSinkParser(lexer));
+        parsers.put(TAB , new TabParser(lexer) );
     }
 
     public static IParser getParser(String parserName){

@@ -5,6 +5,7 @@ import com.github.generator.expersions.SequenceExpersion;
 import com.github.generator.expersions.functions.Date;
 import com.github.generator.expersions.functions.Newline;
 import com.github.generator.expersions.functions.Rep;
+import com.github.generator.expersions.functions.Tab;
 import com.github.generator.expersions.functions.ranges.CharRange;
 import com.github.generator.expersions.functions.ranges.LongRange;
 import com.github.generator.expersions.functions.ranges.StringRange;
@@ -562,7 +563,7 @@ public class TestCase {
         SequenceExpersion seqExp = parser.parse();
         List<Expersion> expList = seqExp.getExpersions();
         Assert.assertEquals(1, expList.size());
-        Assert.assertTrue( expList.get(0) instanceof LongRange );
+        Assert.assertTrue(expList.get(0) instanceof LongRange);
 
         Iterator<LongTerminal> it = ((LongRange)expList.get(0)).iterator();
         Long num = new Long(1);
@@ -596,7 +597,7 @@ public class TestCase {
             if( num == 12L )
                 num = 16L;
         }
-        Assert.assertEquals(new Long(20) , --num);
+        Assert.assertEquals(new Long(20), --num);
     }
 
     @Test
@@ -720,11 +721,34 @@ public class TestCase {
         Assert.assertEquals(3 , repFirstExp.getExpersions().size());
         Assert.assertTrue( repFirstExp.getExpersions().get(0) instanceof Date );
         Assert.assertTrue( repFirstExp.getExpersions().get(1) instanceof StringTerminal );
-        Assert.assertEquals( ",He,ll,o Wor,ld," , ((StringTerminal)repFirstExp.getExpersions().get(1)).getValue() );
+        Assert.assertEquals(",He,ll,o Wor,ld,", ((StringTerminal) repFirstExp.getExpersions().get(1)).getValue());
         Assert.assertTrue( repFirstExp.getExpersions().get(2) instanceof Newline );
         Assert.assertEquals( 3 , ((Rep)expList.get(0)).getMinimumLength() );
         Assert.assertEquals( 3 , ((Rep)expList.get(0)).getMaximumLength() );
 
+    }
+
+    @Test
+    public void test28() throws Exception {
+
+        String input = "Hello TAB() World";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpersion seqExp = parser.parse();
+        List<Expersion> expList = seqExp.getExpersions();
+        Assert.assertEquals(3, expList.size());
+
+        Assert.assertTrue( expList.get(0) instanceof StringTerminal );
+        Assert.assertEquals( "Hello" , ((StringTerminal)expList.get(0)).getValue() );
+
+        Assert.assertTrue( expList.get(1) instanceof Tab);
+        Assert.assertEquals( "\t" , ((Tab)expList.get(1)).generate() );
+
+        Assert.assertTrue( expList.get(2) instanceof StringTerminal );
+        Assert.assertEquals( "World" , ((StringTerminal)expList.get(2)).getValue() );
+
+        Assert.assertEquals( "Hello\tWorld" , seqExp.generate() );
     }
 
 }
