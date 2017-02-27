@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public class ParserProvider {
 
-    private static Map<String,IParser> parsers;
+    private Map<String,IParser> parsers;
 
     public static final String REP = "REP";
     public static final String NEW_LINE = "NEW_LINE";
@@ -21,7 +21,7 @@ public class ParserProvider {
     public static final String FILE = "FILE";
     public static final String RANGE = "range";
 
-    public static void init(Lexer lexer){
+    public ParserProvider(Lexer lexer){
         parsers = new HashMap<String, IParser>();
         parsers.put(REP, new RepParser(lexer));
         parsers.put(NEW_LINE, new NewLineParser(lexer));
@@ -31,7 +31,7 @@ public class ParserProvider {
         parsers.put(TAB , new TabParser(lexer) );
     }
 
-    public static IParser getParser(String parserName){
+    public IParser getParser(String parserName){
         return parsers.get( parserName );
     }
 

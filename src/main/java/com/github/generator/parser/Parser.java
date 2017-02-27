@@ -9,9 +9,11 @@ import com.github.generator.expersions.terminals.StringTerminal;
  */
 public class Parser extends AbstractParser {
 
+    private ParserProvider parserProvider;
+
     public Parser(Lexer lexer){
         super(lexer);
-        ParserProvider.init(lexer);
+        parserProvider = new ParserProvider(lexer);
     }
 
     public SequenceExpersion parse() throws ParseException {
@@ -25,7 +27,7 @@ public class Parser extends AbstractParser {
                 break;
 
             if( token.getType() == Token.Type.FUNCTION ){
-                result.addExpersion( ParserProvider.getParser(token.getValue()).parse() );
+                result.addExpersion( parserProvider.getParser(token.getValue()).parse() );
             }
             else if( token.getType() == Token.Type.SINGLE_QUOTES ){
                 result.addExpersion( new StringTerminal(lexer.readSingleQuoteString()) );
@@ -37,7 +39,7 @@ public class Parser extends AbstractParser {
                 lexer.match('\'');
             }
             else if(token.getType()==Token.Type.L_BRACKET){
-                result.addExpersion( ParserProvider.getParser(ParserProvider.RANGE).parse() );
+                result.addExpersion( parserProvider.getParser(ParserProvider.RANGE).parse() );
             }
         }
 
