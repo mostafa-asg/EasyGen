@@ -53,11 +53,13 @@ Two sets can also be "subtracted".For instance if you want to generate random nu
 ```
 [1..100]-[55..57]
 ```
-**Note** : add and subtract operation on Range are left associative.
+**Note** : add and subtract operation on Range are left associative.  
 **Example**
 ```
 [1..10]+[11..20]-[7..9]
 ```
+The above statment first add [1..10]+[11..20] then subtrat it from [7..9]
+
 #### StringRange
 Syntax   : [ S1 | S2 ] **or** [ S1 | S2 | S3 ] **or** [ S1 | S2 | ... | Sn ]   
 Example 1 :  
@@ -83,4 +85,9 @@ Ranges are great to generate only one random data.if you want to repeat this pro
 ```
 REP( [a..z] , 3 )
 ```
-**output** : generate 3 random character between *a* to *z*. Possible outputs are : **hck** or **dnb**
+**output** : generate 3 random character between *a* to *z*.Some possible outputs could be : **hck** or **dnb**
+The above statment generate random string which lengths is exactly 3.Rep can also use to generate random variable length string.Example:  
+```
+REP( [a..z] , 3 , 10 )
+```
+The above statment generate random length string which minimum length is 3 and maximum length is 10.Some possible outputs could be : hyrtd **or** byqtrwzp
