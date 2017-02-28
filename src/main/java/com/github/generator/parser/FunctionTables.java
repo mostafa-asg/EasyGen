@@ -19,6 +19,7 @@ public class FunctionTables {
             ParserProvider.DATE ,
             ParserProvider.TAB ,
 
+            ParserProvider.CONSOLE ,
             ParserProvider.FILE
     };
 

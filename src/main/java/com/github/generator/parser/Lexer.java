@@ -103,6 +103,34 @@ public class Lexer {
         }
     }
 
+    public int findFirstRightParenthese(){
+        Stack<Character> stack = new Stack<Character>();
+
+        while (true){
+
+            if( c == '\'' ){
+                consume();
+                readSingleQuoteString();
+                continue;
+            }
+            else if ( c == '(' ){
+                stack.push('(');
+            }
+            else if ( c == ')' ){
+                if( stack.size() > 0 )
+                    stack.pop();
+                else
+                    return pos;
+            }
+
+            consume();
+
+            if( c==EOF )
+                throw new Error("reach end of file");
+        }
+    }
+
+
     public String consumeUntil(char untilChar){
 
         StringBuilder sb = new StringBuilder();

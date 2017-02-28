@@ -19,6 +19,7 @@ public class ParserProvider {
     public static final String PAD_RIGHT = "PAD_RIGHT";
     public static final String TAB = "TAB";
     public static final String FILE = "FILE";
+    public static final String CONSOLE = "CONSOLE";
     public static final String RANGE = "range";
 
     public ParserProvider(Lexer lexer){
@@ -28,6 +29,7 @@ public class ParserProvider {
         parsers.put(DATE, new DateParser(lexer));
         parsers.put(RANGE, new RangeParser(lexer));
         parsers.put(FILE , new FileSinkParser(lexer));
+        parsers.put(CONSOLE , new ConsoleSinkParser(lexer));
         parsers.put(TAB , new TabParser(lexer) );
     }
 

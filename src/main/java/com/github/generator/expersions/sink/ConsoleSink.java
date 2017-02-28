@@ -14,6 +14,10 @@ public class ConsoleSink extends Expersion {
         this.expersion = expersion;
     }
 
+    public Expersion getExpersion() {
+        return expersion;
+    }
+
     @Override
     public String generate() throws Exception {
 

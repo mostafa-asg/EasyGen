@@ -9,6 +9,7 @@ import com.github.generator.expersions.functions.Tab;
 import com.github.generator.expersions.functions.ranges.CharRange;
 import com.github.generator.expersions.functions.ranges.LongRange;
 import com.github.generator.expersions.functions.ranges.StringRange;
+import com.github.generator.expersions.sink.ConsoleSink;
 import com.github.generator.expersions.terminals.CharTerminal;
 import com.github.generator.expersions.terminals.LongTerminal;
 import com.github.generator.expersions.terminals.StringTerminal;
@@ -749,6 +750,38 @@ public class TestCase {
         Assert.assertEquals( "World" , ((StringTerminal)expList.get(2)).getValue() );
 
         Assert.assertEquals( "Hello\tWorld" , seqExp.generate() );
+    }
+
+    @Test
+    public void test29() throws Exception {
+
+        String input = "CONSOLE ( REP('HELLO WORLD' NEW_LINE() , 3) )";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpersion seqExp = parser.parse();
+        List<Expersion> expList = seqExp.getExpersions();
+        Assert.assertEquals(1, expList.size());
+        Assert.assertTrue( expList.get(0) instanceof ConsoleSink );
+
+        Assert.assertTrue( ((ConsoleSink) expList.get(0)).getExpersion() instanceof SequenceExpersion );
+        SequenceExpersion innerConoleExp = (SequenceExpersion) ((ConsoleSink) expList.get(0)).getExpersion();
+        Assert.assertEquals(1, innerConoleExp.getExpersions().size());
+        Assert.assertTrue( innerConoleExp.getExpersions().get(0) instanceof Rep);
+
+        Rep repExp = (Rep)innerConoleExp.getExpersions().get(0);
+        Assert.assertTrue( repExp.getExpersion() instanceof  SequenceExpersion );
+        SequenceExpersion repInnerExp = (SequenceExpersion)repExp.getExpersion();
+        Assert.assertEquals( 2 , repInnerExp.getExpersions().size() );
+        Assert.assertTrue( repInnerExp.getExpersions().get(0) instanceof StringTerminal );
+        Assert.assertTrue( repInnerExp.getExpersions().get(1) instanceof Newline );
+        Assert.assertEquals( "HELLO WORLD" , ((StringTerminal)repInnerExp.getExpersions().get(0)).getValue() );
+
+        String output = seqExp.generate();
+        Assert.assertEquals( "HELLO WORLD" + System.lineSeparator() +
+                             "HELLO WORLD" + System.lineSeparator() +
+                             "HELLO WORLD" + System.lineSeparator() , output
+        );
     }
 
 }
