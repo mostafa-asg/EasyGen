@@ -12,6 +12,9 @@ import java.util.Map;
 public class FunctionTables {
 
     private static String[] functions = new String[] {
+
+            ParserProvider.DEFINE ,
+
             ParserProvider.REP ,
             ParserProvider.PAD_LEFT ,
             ParserProvider.PAD_RIGHT ,

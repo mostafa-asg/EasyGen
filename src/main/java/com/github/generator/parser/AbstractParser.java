@@ -38,6 +38,15 @@ public abstract class AbstractParser implements IParser {
 
         return token;
     }
+    protected Token ensureNextTokenIs(Token.Type type , String value) throws ParseException {
+
+        Token token = lexer.nextToken();
+
+        if (token.getType() != type || !token.getValue().equals(value))
+            throw new ParseException();
+
+        return token;
+    }
 
     protected Token ensureCurrentTokenIs(Token.Type type) throws ParseException {
 

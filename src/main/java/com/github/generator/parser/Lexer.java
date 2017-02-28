@@ -1,6 +1,8 @@
 package com.github.generator.parser;
 
 import java.util.Stack;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author Mostafa Asgari
@@ -345,4 +347,16 @@ public class Lexer {
 
     }
 
+    public void replcaeInput(int startIndex, String symbol, String replaceWith) {
+
+        if( startIndex < input.length() ){
+
+            String firstPart = input.substring(0,startIndex);
+            String secondPart = input.substring(startIndex);
+
+            this.input = firstPart + secondPart.replaceAll("\\b" + Pattern.quote(symbol) + "\\b", Matcher.quoteReplacement(replaceWith));
+
+        }
+
+    }
 }

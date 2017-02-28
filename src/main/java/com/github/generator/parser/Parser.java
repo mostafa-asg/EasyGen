@@ -27,7 +27,13 @@ public class Parser extends AbstractParser {
                 break;
 
             if( token.getType() == Token.Type.FUNCTION ){
-                result.addExpersion( parserProvider.getParser(token.getValue()).parse() );
+
+                if( token.getValue().equals( ParserProvider.DEFINE ) ){
+                    parserProvider.getParser(token.getValue()).parse();
+                }
+                else {
+                    result.addExpersion(parserProvider.getParser(token.getValue()).parse());
+                }
             }
             else if( token.getType() == Token.Type.SINGLE_QUOTES ){
                 result.addExpersion( new StringTerminal(lexer.readSingleQuoteString()) );
