@@ -22,7 +22,7 @@ Example :
 ```
 [1..100]  
 ```
-Output  : random number between 1 to 100 inclusively  
+**Output**  : random number between 1 to 100 inclusively  
 **Note :** number1 <= number2
 
 #### CharRange
@@ -31,7 +31,7 @@ Example :
 ```
 [a..z]  
 ```
-Output  : random char between a to z inclusively   
+**Output**  : random char between a to z inclusively   
 **Note :** char1 <= char2
 
 #### StringRange
@@ -40,7 +40,7 @@ Example 1 :
 ```
 [ Hello | World]    
 ```
-Output : random selection between Hello or World  
+**Output** : random selection between Hello or World  
 
 
 Example 2 :  
@@ -52,4 +52,11 @@ Output : random selection between Hello or World or Java or Love
 ```
 [ 'Hello World' | 'This is a test' ]  
 ```
-Output : random selection between *Hello World* and *This is a test*.  
+**Output** : random selection between *Hello World* and *This is a test*.  
+
+### Repetition
+Ranges are great to generate only one random data.if you want to repeat this process *N* times, you can use **REP** function:
+```
+REP( [a..z] , 3 )
+```
+**output** : generate 3 random character between *a* to *z*. Possible outputs are : **hck** or **dnb**
