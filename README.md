@@ -11,12 +11,13 @@ java -jar Generator-1.0-SNAPSHOT-jar-with-dependencies.jar YOUR_DSL_FILE_PATH
 
 ## DSL Syntax
 ### Range
-Range in EasyGen is bulding block to generate random data.EasyGen get an item of a Range randomly.There is 3 type of Range in EasyGen:
+Range in EasyGen is bulding block to generate random data.EasyGen gets an item of a Range randomly.There is 3 type of range in EasyGen:
 * LongRange
 * CharRange
 * StringRange
 
 #### LongRange
+LongRange is a range of numbers.You specify start and end, and EasyGen gets a number randomly from start to end.
 Syntax  : [ number1 .. number2 ]  
 Example :  
 ```
@@ -26,14 +27,37 @@ Example :
 **Note :** number1 <= number2
 
 #### CharRange
+CharRange is a range of characters.You specify start and end, and EasyGen gets a character randomly from start to end.
 Syntax  : [ char1 .. char2 ]  
 Example :  
 ```
 [a..z]  
 ```
-**Output**  : random char between a to z inclusively   
+**Output**  : random character between a to z inclusively   
 **Note :** char1 <= char2
 
+#### Range Unions
+Two Range can be "added" together.For example if you want to generate random character between [a,b,c,d,e] and [v,w,x,y,z] you can write it as :  
+```
+[a..e]+[v..z]
+```
+**Output**  : random character in [a,b,c,d,e,v,w,x,y,z]  
+**Example**
+```
+[1..5]+[50..55]+[90..95]
+```
+**Output** : random number in [1,2,3,4,5,50,51,52,53,54,55,90,91,92,93,94,95]
+
+#### Range Complements
+Two sets can also be "subtracted".For instance if you want to generate random nuumber between 1 to 100 but not [55,56,57] you can write it as :
+```
+[1..100]-[55..57]
+```
+**Note** : add and subtract operation on Range are left associative.
+**Example**
+```
+[1..10]+[11..20]-[7..9]
+```
 #### StringRange
 Syntax   : [ S1 | S2 ] **or** [ S1 | S2 | S3 ] **or** [ S1 | S2 | ... | Sn ]   
 Example 1 :  
