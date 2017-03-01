@@ -59,8 +59,8 @@ Two sets can also be "subtracted".For instance if you want to generate random nu
 The above statment first add [1..10]+[11..20] then subtrat it from [7..9]
 
 #### StringRange
-If you want to select randomly between words, you can use StringRange.The syntax is like LongRange and CharRange but you must seperate your data with **|** :
-Syntax   : **[ S1 | S2 ]** or **[ S1 | S2 | S3 ]** or **[ S1 | S2 | ... | Sn ]**
+If you want to select randomly between words, you can use StringRange.The syntax is like LongRange and CharRange but you must seperate your data with **|** :  
+Syntax   : **[ S1 | S2 ]** or **[ S1 | S2 | S3 ]** or **[ S1 | S2 | ... | Sn ]**  
 Example 1 :  
 ```
 [ Hello | World]    
@@ -88,7 +88,20 @@ The above example could generate 9 possible random string which starts with lowe
 ```
 [   a    ..  c   ]   H  e l    l o [ A   .. C ]
 ```
-Its generated output is exactly same as **[a..c]Hello[A..C]**.
+Its generated output is exactly same as **[a..c]Hello[A..C]**.  
+If you want to preserve spaces you can put your string in single quote:  
+```
+[   a    ..  c   ]'   H  e l    l o '[ A   .. C ]
+```
+**NOTE :** single quote is a escape character in EasyGen. That means every thing that you put in single quote, treat as a string without any modification or interpretation.Example :  
+```
+  '[A..Z]'
+```
+**output** : [A..Z]
+If you want to generate single quote in your generated output you can use \'.Example:  
+```
+  '[ \'A\' .. \'Z\' ]'
+```
 
 ### Repetition
 Ranges are great to generate only one random data.if you want to repeat this process *N* times, you can use **REP** function:
@@ -109,4 +122,11 @@ f REP( [a..z] , 8 ) [x..z]
 **Example** : generate random url with minimum length of 3 and maximum length of 20 that contains [a..z] characters and start with **http** or **https** and ends with **.com** or **.net** or **.org**
 ```
 [http | https] :// REP( [a..z] , 3 , 20 ) [ .com | .org | .net ]
+```
+The above example generate just one url. You can use REP function to repeat everything. So if you want to generate 1000 url as same as above you can write :  
+```
+REP (
+[http | https] :// REP( [a..z] , 3 , 20 ) . [ com | org | net ]
+, 1000
+)
 ```
