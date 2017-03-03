@@ -4,6 +4,7 @@ import com.github.generator.expersions.Expersion;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.nio.file.FileAlreadyExistsException;
 
 /**
  * @author Mostafa Asgari
@@ -25,6 +26,9 @@ public class FileSink extends Expersion {
     public String generate() throws Exception {
 
         File file = new File(path);
+        if( file.exists() && append==false ){
+            throw new FileAlreadyExistsException(path);
+        }
 
         String content = expersion.generate();
 
