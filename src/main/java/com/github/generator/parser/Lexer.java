@@ -182,7 +182,7 @@ public class Lexer {
     }
     public boolean isLookaheadIgnoreWhitespace(char expectedChar) {
 
-        int tempPos = pos+1;
+        int tempPos = pos;
 
         if(tempPos >= input.length())
             return false;

@@ -26,11 +26,11 @@ public class RepParser extends AbstractParser {
         firstParam = new Parser(new Lexer(newInput)).parse();
 
         ensureNextTokenIs(Token.Type.COMMA);
-
         Token secondParam = ensureNextTokenIs(Token.Type.NUMBER);
 
         Token thirdParam = null;
-        if( lexer.tryMatch(',') ){
+        if( lexer.isLookaheadIgnoreWhitespace(',') ){
+            ensureNextTokenIs(Token.Type.COMMA);
             thirdParam = ensureNextTokenIs(Token.Type.NUMBER);
         }
 

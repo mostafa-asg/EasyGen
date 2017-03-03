@@ -816,4 +816,32 @@ public class TestCase {
         Assert.assertTrue(expList.get(0) instanceof Date);
     }
 
+    @Test
+    public void test32() throws Exception {
+
+        String input = "REP(   [    10     ..     99    ]      ,       3       ,       7        )";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpersion seqExp = parser.parse();
+        List<Expersion> expList = seqExp.getExpersions();
+
+        Assert.assertEquals(1, expList.size());
+        Assert.assertTrue(expList.get(0) instanceof Rep);
+
+        Rep rep = (Rep) expList.get(0);
+        Assert.assertTrue(rep.getExpersion() instanceof SequenceExpersion);
+        Assert.assertEquals(3, rep.getMinimumLength());
+        Assert.assertEquals(7, rep.getMaximumLength());
+
+        Iterator<LongTerminal> it = ((LongRange) ((SequenceExpersion) rep.getExpersion()).getExpersions().get(0)).iterator();
+
+        Long num = new Long(10);
+        while (it.hasNext()) {
+            Assert.assertEquals(num, it.next().getValue());
+            ++num;
+        }
+        Assert.assertEquals(--num, new Long(99));
+    }
+
 }
