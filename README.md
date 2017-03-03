@@ -8,6 +8,21 @@ From the project folder run bellow commands to build and run the project:
 mvn clean package
 java -jar Generator-1.0-SNAPSHOT-jar-with-dependencies.jar YOUR_DSL_FILE_PATH
 ```
+### Quick start
+The following example create a CSV file that has 5 header ( UserEmailAddress , UserIP , DestinationIP , VisitedUrl , Date ) and store 100 record of random generated data to a file ( /tmp/output.csv ) :
+```
+DEFINE( IP AS [0..255].[0..255].[0..255].[0..255] )
+DEFINE( URL AS [http|https]:// REP( [a..z] , 3 , 20 ).[com|org|net] )
+DEFINE( Email AS REP([a..z],1,20)@[gmail|yahoo|msn].com )
+DEFINE( COMMA AS ' , ' )
+
+FILE (
+	'UserEmailAddress , UserIP , DestinationIP , VisitedUrl , Date' NEW_LINE()
+	REP(
+		Email COMMA IP COMMA IP COMMA URL COMMA DATE('dd/MM/yyyy H:m:s') NEW_LINE()	
+	, 100 )
+, /tmp/output.csv)
+```
 
 ## DSL Syntax
 ### Range
