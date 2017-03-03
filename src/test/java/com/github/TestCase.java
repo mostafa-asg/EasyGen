@@ -802,4 +802,18 @@ public class TestCase {
         Assert.assertTrue(expList.get(5) instanceof Tab);
         Assert.assertTrue(expList.get(6) instanceof Date);
     }
+
+    @Test
+    public void test31() throws Exception {
+
+        String input = "DATE('yyyy-MM-dd H:m:s')";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpersion seqExp = parser.parse();
+        List<Expersion> expList = seqExp.getExpersions();
+        Assert.assertEquals(1, expList.size());
+        Assert.assertTrue(expList.get(0) instanceof Date);
+    }
+
 }
