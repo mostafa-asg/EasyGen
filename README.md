@@ -9,7 +9,7 @@ mvn clean package
 java -jar Generator-1.0-SNAPSHOT-jar-with-dependencies.jar YOUR_DSL_FILE_PATH
 ```
 ### Quick start
-The following example create a CSV file that has 5 header ( UserEmailAddress , UserIP , DestinationIP , VisitedUrl , Date ) and store 100 record of random generated data to a file ( /tmp/output.csv ) :
+The following example create a CSV file that has 5 headers ( UserEmailAddress , UserIP , DestinationIP , VisitedUrl , Date ) and store 100 records of random generated data to a file ( /tmp/output.csv ) :
 ```
 DEFINE( IP AS [0..255].[0..255].[0..255].[0..255] )
 DEFINE( URL AS [http|https]:// REP( [a..z] , 3 , 20 ).[com|org|net] )
