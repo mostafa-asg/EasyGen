@@ -26,8 +26,11 @@ public class FileSinkParser extends AbstractParser {
         ensureNextTokenIs(Token.Type.COMMA);
         Token filePathToken = ensureNextTokenIs(Token.Type.STRING);
 
-        ensureNextTokenIs(Token.Type.COMMA);
-        Token appendToken = ensureNextTokenIs(Token.Type.STRING);
+        Token appendToken = new Token("false",Token.Type.STRING);
+        if( lexer.isLookaheadIgnoreWhitespace(',') ) {
+            ensureNextTokenIs(Token.Type.COMMA);
+            appendToken = ensureNextTokenIs(Token.Type.STRING);
+        }
 
         ensureNextTokenIs(Token.Type.R_PARENTHESE);
 
