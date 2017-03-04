@@ -25,13 +25,22 @@ FILE (
 ```
 
 ## DSL Syntax
-### Range
+* [Ranges](#range)
+    * [LongRange](#lrange)
+    * [CharRange](#crange)
+    * [Range Unions](#addrange)
+    * [Range Complements](#subtract_range)
+    * [StringRange](#srange)
+* [Static data](#sdata)    
+* [Repetition](#rep)
+       
+### Range<a name="range"></a>
 Range in EasyGen is bulding block to generate random data.EasyGen gets an item of a Range randomly.There is 3 type of range in EasyGen:
 * LongRange
 * CharRange
 * StringRange
 
-#### LongRange
+#### LongRange<a name="lrange"></a>
 LongRange is a range of numbers.You specify start and end, and EasyGen gets a number randomly from start to end.
 Syntax  : [ number1 .. number2 ]  
 Example :  
@@ -41,7 +50,7 @@ Example :
 **Output**  : random number between 1 to 100 inclusively  
 **NOTE :** number1 <= number2
 
-#### CharRange
+#### CharRange<a name="crange"></a>
 CharRange is a range of characters.You specify start and end, and EasyGen gets a character randomly from start to end.
 Syntax  : [ char1 .. char2 ]  
 Example :  
@@ -51,7 +60,7 @@ Example :
 **Output**  : random character between a to z inclusively   
 **NOTE :** char1 <= char2
 
-#### Range Unions
+#### Range Unions<a name="addrange"></a>
 Two Range can be "added" together.For example if you want to generate random character between [a,b,c,d,e] and [v,w,x,y,z] you can write it as :  
 ```
 [a..e]+[v..z]
@@ -61,7 +70,7 @@ Two Range can be "added" together.For example if you want to generate random cha
 [1..5]+[50..55]+[90..95]
 ```
 
-#### Range Complements
+#### Range Complements<a name="subtract_range"></a>
 Two sets can also be "subtracted".For instance if you want to generate random nuumber between 1 to 100 but not [55,56,57] you can write it as :
 ```
 [1..100]-[55..57]
@@ -73,7 +82,7 @@ Two sets can also be "subtracted".For instance if you want to generate random nu
 ```
 The above statment first add [1..10]+[11..20] then subtrat it from [7..9]
 
-#### StringRange
+#### StringRange<a name="srange"></a>
 If you want to select randomly between words, you can use StringRange.The syntax is like LongRange and CharRange but you must seperate your data with **|** :  
 Syntax   : **[ S1 | S2 ]** or **[ S1 | S2 | S3 ]** or **[ S1 | S2 | ... | Sn ]**  
 Example 1 :  
@@ -93,7 +102,7 @@ Example 2 :
 ```
 **Output** : random selection between *Hello World* and *This is a test*.  
 
-### Static data
+### Static data<a name="sdata"></a>
 In EasyGen,you can always mix static string with EasyGen DSL syntax to produce new data.Example:  
 ```
 [a..c]Hello[A..C]
@@ -118,7 +127,7 @@ If you want to generate single quote in your generated output you can use \'.Exa
   '[ \'A\' .. \'Z\' ]'
 ```
 
-### Repetition
+### Repetition<a name="rep"></a>
 Ranges are great to generate only one random data.if you want to repeat this process *N* times, you can use **REP** function:
 ```
 REP( [a..z] , 3 )
