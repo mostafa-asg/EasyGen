@@ -33,3 +33,4 @@ FILE (
     * [StringRange](https://github.com/mostafa-asg/EasyGen/wiki/StringRange)
 * [Static data](https://github.com/mostafa-asg/EasyGen/wiki/Static-data)    
 * [Repetition](https://github.com/mostafa-asg/EasyGen/wiki/Repetition)     
+* [Functions](https://github.com/mostafa-asg/EasyGen/wiki/Functions)
