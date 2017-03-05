@@ -1,5 +1,7 @@
 package com.github.generator.parser;
 
+import com.github.generator.expersions.Expersion;
+
 /**
  * Created by Mostafa on 02/23/2017.
  */
@@ -57,5 +59,25 @@ public abstract class AbstractParser implements IParser {
 
         return token;
     }
+
+    protected Expersion parseUntilNextComma() throws ParseException {
+
+        int currentPos = lexer.getCurrentPosition();
+        int endPos = lexer.findFirstCommaPosition();
+        String newInput = lexer.substring(currentPos,endPos);
+
+        return new Parser(new Lexer(newInput)).parse();
+    }
+
+    protected Expersion parseUntilNextRightParenthese() throws ParseException {
+
+        int currentPos = lexer.getCurrentPosition();
+        int endPos = lexer.findFirstRightParenthese();
+        String newInput = lexer.substring(currentPos,endPos);
+
+        return new Parser(new Lexer(newInput)).parse();
+
+    }
+
 
 }

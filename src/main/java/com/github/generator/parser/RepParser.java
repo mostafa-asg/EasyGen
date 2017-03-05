@@ -17,13 +17,7 @@ public class RepParser extends AbstractParser {
 
         ensureNextTokenIs(Token.Type.L_PARENTHESE);
 
-        Expersion firstParam = null;
-
-        int tempPos = lexer.getCurrentPosition();
-        int nextCommaPos = lexer.findFirstCommaPosition();
-
-        String newInput = lexer.substring(tempPos,nextCommaPos);
-        firstParam = new Parser(new Lexer(newInput)).parse();
+        Expersion firstParam = parseUntilNextComma();
 
         ensureNextTokenIs(Token.Type.COMMA);
         Token secondParam = ensureNextTokenIs(Token.Type.NUMBER);

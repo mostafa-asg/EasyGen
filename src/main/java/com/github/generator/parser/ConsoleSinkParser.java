@@ -16,11 +16,7 @@ public class ConsoleSinkParser extends AbstractParser {
     public Expersion parse() throws ParseException {
 
         ensureNextTokenIs( Token.Type.L_PARENTHESE );
-        int currentPos = lexer.getCurrentPosition();
-        int endPos = lexer.findFirstRightParenthese();
-
-        String newInput = lexer.substring(currentPos,endPos);
-        Expersion exp = new Parser(new Lexer(newInput)).parse();
+        Expersion exp = parseUntilNextRightParenthese();
 
         return new ConsoleSink( exp );
 
