@@ -2,10 +2,7 @@ package com.github;
 
 import com.github.generator.expersions.Expersion;
 import com.github.generator.expersions.SequenceExpersion;
-import com.github.generator.expersions.functions.Date;
-import com.github.generator.expersions.functions.Newline;
-import com.github.generator.expersions.functions.Rep;
-import com.github.generator.expersions.functions.Tab;
+import com.github.generator.expersions.functions.*;
 import com.github.generator.expersions.functions.ranges.CharRange;
 import com.github.generator.expersions.functions.ranges.LongRange;
 import com.github.generator.expersions.functions.ranges.StringRange;
@@ -844,4 +841,46 @@ public class TestCase {
         Assert.assertEquals(--num, new Long(99));
     }
 
+    @Test
+    public void test33() throws Exception {
+        PadLeft padLeft = new PadLeft(new StringTerminal("ABC"), 7, '*');
+        PadRight padRight = new PadRight(new StringTerminal("ABC"), 8, '@');
+        Assert.assertEquals("****ABC", padLeft.generate());
+        Assert.assertEquals("ABC@@@@@", padRight.generate());
+
+        padLeft = new PadLeft(new StringTerminal("ABC"), 2, '?');
+        Assert.assertEquals("ABC", padLeft.generate());
+
+        padRight = new PadRight(new StringTerminal("ABC"), 3, '-');
+        Assert.assertEquals("ABC", padRight.generate());
+    }
+
+    @Test
+    public void test34() throws Exception {
+
+        String input = "PAD_LEFT( [a..c]ABC[x..z] , 8 , * )";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpersion seqExp = parser.parse();
+        List<Expersion> expList = seqExp.getExpersions();
+
+        Assert.assertEquals(1, expList.size());
+        Assert.assertTrue(expList.get(0) instanceof PadLeft);
+
+        PadLeft padLeft = (PadLeft)expList.get(0);
+        Assert.assertTrue( padLeft.getExpersion() instanceof SequenceExpersion );
+        SequenceExpersion padLeftExp = (SequenceExpersion)padLeft.getExpersion();
+        Assert.assertEquals( 3 , padLeftExp.getExpersions().size() );
+        Assert.assertTrue( padLeftExp.getExpersions().get(0) instanceof CharRange );
+        Assert.assertTrue( padLeftExp.getExpersions().get(1) instanceof StringTerminal );
+        Assert.assertTrue( padLeftExp.getExpersions().get(2) instanceof CharRange );
+
+        String output = seqExp.generate();
+        Assert.assertEquals( "***" , output.substring(0,3) );
+        Assert.assertTrue( output.charAt(3) == 'a' || output.charAt(3) == 'b' || output.charAt(3) == 'c' );
+        Assert.assertEquals( "ABC" , output.substring(4,7) );
+        Assert.assertTrue( output.charAt(7) == 'x' || output.charAt(7) == 'y' || output.charAt(7) == 'z' );
+
+    }
 }

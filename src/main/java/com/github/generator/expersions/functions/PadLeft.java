@@ -17,6 +17,18 @@ public class PadLeft extends Expersion {
         this.fillWith = fillWith;
     }
 
+    public Expersion getExpersion() {
+        return expersion;
+    }
+
+    public int getMinimumLength() {
+        return minimumLength;
+    }
+
+    public char getFillWith() {
+        return fillWith;
+    }
+
     @Override
     public String generate() throws Exception {
 
