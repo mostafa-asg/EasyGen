@@ -332,7 +332,7 @@ public class Lexer {
             consume();
         }
 
-        if( sb.length() == 1 && Character.isAlphabetic(sb.charAt(0)) ) {
+        if( sb.length() == 1 && !isNumber(sb.toString()))  {
             currentToken = new Token(sb.toString(), Token.Type.CHAR);
             return currentToken;
         }
