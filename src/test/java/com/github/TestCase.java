@@ -883,4 +883,32 @@ public class TestCase {
         Assert.assertTrue( output.charAt(7) == 'x' || output.charAt(7) == 'y' || output.charAt(7) == 'z' );
 
     }
+
+    @Test
+    public void test35() throws Exception {
+
+        String input = "PAD_RIGHT( [a..c]ABC[x..z] , 8 , * )";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpersion seqExp = parser.parse();
+        List<Expersion> expList = seqExp.getExpersions();
+
+        Assert.assertEquals(1, expList.size());
+        Assert.assertTrue(expList.get(0) instanceof PadRight);
+
+        PadRight padRight = (PadRight) expList.get(0);
+        Assert.assertTrue( padRight.getExpersion() instanceof SequenceExpersion );
+        SequenceExpersion padRightExp = (SequenceExpersion)padRight.getExpersion();
+        Assert.assertEquals( 3 , padRightExp.getExpersions().size() );
+        Assert.assertTrue( padRightExp.getExpersions().get(0) instanceof CharRange );
+        Assert.assertTrue( padRightExp.getExpersions().get(1) instanceof StringTerminal );
+        Assert.assertTrue( padRightExp.getExpersions().get(2) instanceof CharRange );
+
+        String output = seqExp.generate();
+        Assert.assertTrue( output.charAt(0) == 'a' || output.charAt(0) == 'b' || output.charAt(0) == 'c' );
+        Assert.assertEquals( "ABC" , output.substring(1,4) );
+        Assert.assertTrue( output.charAt(4) == 'x' || output.charAt(4) == 'y' || output.charAt(4) == 'z' );
+        Assert.assertEquals( "***" , output.substring(5) );
+    }
 }

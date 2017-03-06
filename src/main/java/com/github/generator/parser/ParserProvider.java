@@ -33,6 +33,7 @@ public class ParserProvider {
         parsers.put(CONSOLE , new ConsoleSinkParser(lexer));
         parsers.put(TAB , new TabParser(lexer) );
         parsers.put(PAD_LEFT , new PadLeftParser(lexer));
+        parsers.put(PAD_RIGHT , new PadRightParser(lexer));
         parsers.put(DEFINE, new DefineParser(lexer));
     }
 
