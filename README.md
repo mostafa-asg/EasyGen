@@ -9,6 +9,7 @@ mvn clean package
 java -jar Generator-1.0-SNAPSHOT-jar-with-dependencies.jar YOUR_DSL_FILE_PATH
 ```
 ### Quick start
+**Example 1:**  
 The following example create a CSV file that has 5 headers ( UserEmailAddress , UserIP , DestinationIP , VisitedUrl , Date ) and store 100 records of random generated data to a file ( /tmp/output.csv ) :
 ```
 DEFINE( IP AS [0..255].[0..255].[0..255].[0..255] )
@@ -22,6 +23,46 @@ FILE (
 		Email COMMA IP COMMA IP COMMA URL COMMA DATE('dd/MM/yyyy H:m:s') NEW_LINE()	
 	, 100 )
 , /tmp/output.csv)
+```
+
+**Example 2:**  
+To output a table like bellow to the console :  
+```
+--------------------------------------------------------------------------------
+|UserID            |Username           |Password           |RegisterDate       |
+--------------------------------------------------------------------------------
+|1                 |YJBiPguRIOsyj      |UNaqeYYbMA         |2017/03/06 14:31:17|
+--------------------------------------------------------------------------------
+|2                 |nwkk               |rfH                |2017/03/06 14:31:17|
+--------------------------------------------------------------------------------
+|3                 |MXukiLsbspasLJ     |qAnQaIDOEBjfoppY   |2017/03/06 14:31:17|
+--------------------------------------------------------------------------------
+|4                 |GbIYOTqZXrhQG      |JFJRslE            |2017/03/06 14:31:17|
+--------------------------------------------------------------------------------
+|5                 |ULhsyhsppJS        |utfhcKppbM         |2017/03/06 14:31:17|
+--------------------------------------------------------------------------------
+|6                 |xSwWUFDvs          |FjscE              |2017/03/06 14:31:17|
+--------------------------------------------------------------------------------
+```
+you can write:  
+```
+DEFINE( DRAW_LINE AS REP('-',80) NEW_LINE() )
+DEFINE( ID AS IDENTITY(1,1) )
+DEFINE( username AS REP([a..z]+[A..Z],3,18) )
+DEFINE( Pwd AS REP([a..z]+[A..Z],3,18) )
+DEFINE( Date AS DATE('yyyy/MM/dd H:m:s') )
+
+CONSOLE(
+
+	DRAW_LINE
+	'|' PAD_RIGHT(UserID,18,' ') '|' PAD_RIGHT(Username,19,' ') '|' PAD_RIGHT(Password,19,' ') '|' PAD_RIGHT(RegisterDate,19,' ') '|' NEW_LINE()
+	DRAW_LINE
+
+	REP(
+		'|' PAD_RIGHT(ID,18,' ') '|' PAD_RIGHT(username,19,' ') '|' PAD_RIGHT(Pwd,19,' ') '|' PAD_RIGHT(Date,19,' ') '|' NEW_LINE()
+		DRAW_LINE
+	, 6)
+)
 ```
 
 ## DSL Syntax
