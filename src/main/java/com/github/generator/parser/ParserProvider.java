@@ -19,6 +19,7 @@ public class ParserProvider {
     public static final String PAD_LEFT = "PAD_LEFT";
     public static final String PAD_RIGHT = "PAD_RIGHT";
     public static final String TAB = "TAB";
+    public static final String IDENTITY = "IDENTITY";
     public static final String FILE = "FILE";
     public static final String CONSOLE = "CONSOLE";
     public static final String DEFINE = "DEFINE";
@@ -35,6 +36,7 @@ public class ParserProvider {
         parsers.put(TAB , new TabParser(lexer) );
         parsers.put(PAD_LEFT , new PadLeftParser(lexer));
         parsers.put(PAD_RIGHT , new PadRightParser(lexer));
+        parsers.put(IDENTITY , new IdentityParser(lexer));
         parsers.put(DEFINE, new DefineParser(lexer));
     }
 

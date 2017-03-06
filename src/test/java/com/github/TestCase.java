@@ -12,6 +12,7 @@ import com.github.generator.expersions.terminals.LongTerminal;
 import com.github.generator.expersions.terminals.StringTerminal;
 import com.github.generator.parser.Lexer;
 import com.github.generator.parser.Parser;
+import com.github.generator.parser.padding.PadRightParser;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -910,5 +911,31 @@ public class TestCase {
         Assert.assertEquals( "ABC" , output.substring(1,4) );
         Assert.assertTrue( output.charAt(4) == 'x' || output.charAt(4) == 'y' || output.charAt(4) == 'z' );
         Assert.assertEquals( "***" , output.substring(5) );
+    }
+
+    @Test
+    public void test36() throws Exception {
+
+        String input = "IDENTITY(1,1) IDENTITY() IDENTITY() IDENTITY() IDENTITY()";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpersion seqExp = parser.parse();
+        List<Expersion> expList = seqExp.getExpersions();
+
+        Assert.assertEquals("12345" , seqExp.generate());
+    }
+
+    @Test
+    public void test37() throws Exception {
+
+        String input = "IDENTITY(120,2)' 'IDENTITY()' 'IDENTITY()' 'IDENTITY()' 'IDENTITY()";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpersion seqExp = parser.parse();
+        List<Expersion> expList = seqExp.getExpersions();
+
+        Assert.assertEquals("120 122 124 126 128" , seqExp.generate());
     }
 }

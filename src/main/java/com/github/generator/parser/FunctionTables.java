@@ -21,6 +21,7 @@ public class FunctionTables {
             ParserProvider.NEW_LINE ,
             ParserProvider.DATE ,
             ParserProvider.TAB ,
+            ParserProvider.IDENTITY ,
 
             ParserProvider.CONSOLE ,
             ParserProvider.FILE
