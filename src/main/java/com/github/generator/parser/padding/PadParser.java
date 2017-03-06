@@ -1,19 +1,23 @@
-package com.github.generator.parser;
+package com.github.generator.parser.padding;
 
 import com.github.generator.expersions.Expersion;
-import com.github.generator.expersions.functions.PadRight;
+import com.github.generator.parser.AbstractParser;
+import com.github.generator.parser.Lexer;
+import com.github.generator.parser.ParseException;
+import com.github.generator.parser.Token;
 
 /**
  * @author Mostafa Asgari
  * @since 3/6/17
  */
-public class PadRightParser extends AbstractParser {
+public abstract class PadParser extends AbstractParser {
 
-    public PadRightParser(Lexer lexer) {
+    public PadParser(Lexer lexer) {
         super(lexer);
     }
 
     public Expersion parse() throws ParseException {
+
         ensureNextTokenIs(Token.Type.L_PARENTHESE);
 
         Expersion firstParam = parseUntilNextComma() ;
@@ -41,6 +45,8 @@ public class PadRightParser extends AbstractParser {
 
         ensureNextTokenIs(Token.Type.R_PARENTHESE);
 
-        return new PadRight( firstParam , minLengthToken.getValueAsInt() , fillWith );
+        return getPad(firstParam , minLengthToken.getValueAsInt() , fillWith);
     }
+
+    public abstract Expersion getPad(Expersion firstParam , int minLength , char fillWith);
 }
