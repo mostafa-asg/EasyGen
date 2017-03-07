@@ -2,6 +2,8 @@ package com.github.generator.parser;
 
 import com.github.generator.parser.padding.PadLeftParser;
 import com.github.generator.parser.padding.PadRightParser;
+import com.github.generator.parser.uniqueness.IdentityParser;
+import com.github.generator.parser.uniqueness.MD5Parser;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,11 +1,9 @@
-package com.github.generator.expersions.functions;
+package com.github.generator.expersions.functions.uniqueness;
 
 import com.github.generator.expersions.Expersion;
+import com.github.generator.expersions.functions.Rep;
 import com.github.generator.expersions.functions.ranges.CharRange;
-
-import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  * @author Mostafa Asgari
@@ -21,9 +19,7 @@ public class MD5 extends Expersion {
 
         String randomStr = new Rep( charRange , 1 , 256 ).generate();
 
-        MessageDigest md5 = MessageDigest.getInstance("MD5");
-        md5.update(StandardCharsets.UTF_8.encode(randomStr));
-        return String.format("%032x", new BigInteger(1, md5.digest()));
+        return DigestUtils.md5Hex( randomStr );
     }
 
 }

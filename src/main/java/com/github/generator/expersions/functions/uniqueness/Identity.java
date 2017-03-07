@@ -1,4 +1,4 @@
-package com.github.generator.expersions.functions;
+package com.github.generator.expersions.functions.uniqueness;
 
 import com.github.generator.expersions.Expersion;
 

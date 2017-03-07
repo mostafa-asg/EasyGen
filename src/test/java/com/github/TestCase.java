@@ -6,13 +6,14 @@ import com.github.generator.expersions.functions.*;
 import com.github.generator.expersions.functions.ranges.CharRange;
 import com.github.generator.expersions.functions.ranges.LongRange;
 import com.github.generator.expersions.functions.ranges.StringRange;
+import com.github.generator.expersions.functions.uniqueness.Identity;
+import com.github.generator.expersions.functions.uniqueness.MD5;
 import com.github.generator.expersions.sink.ConsoleSink;
 import com.github.generator.expersions.terminals.CharTerminal;
 import com.github.generator.expersions.terminals.LongTerminal;
 import com.github.generator.expersions.terminals.StringTerminal;
 import com.github.generator.parser.Lexer;
 import com.github.generator.parser.Parser;
-import com.github.generator.parser.padding.PadRightParser;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -952,7 +953,7 @@ public class TestCase {
         List<Expersion> expList = seqExp.getExpersions();
 
         Assert.assertEquals(1 , expList.size());
-        Assert.assertTrue( expList.get(0) instanceof MD5 );
+        Assert.assertTrue( expList.get(0) instanceof MD5);
         Assert.assertEquals(32 , seqExp.generate().length() );
     }
 }
