@@ -5,6 +5,7 @@ import com.github.generator.parser.padding.PadRightParser;
 import com.github.generator.parser.uniqueness.IdentityParser;
 import com.github.generator.parser.uniqueness.MD2Parser;
 import com.github.generator.parser.uniqueness.MD5Parser;
+import com.github.generator.parser.uniqueness.SHA1Parser;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,6 +26,7 @@ public class ParserProvider {
     public static final String IDENTITY = "IDENTITY";
     public static final String MD2 = "MD2";
     public static final String MD5 = "MD5";
+    public static final String SHA1 = "SHA1";
     public static final String FILE = "FILE";
     public static final String CONSOLE = "CONSOLE";
     public static final String DEFINE = "DEFINE";
@@ -44,6 +46,7 @@ public class ParserProvider {
         parsers.put(IDENTITY , new IdentityParser(lexer));
         parsers.put(MD2 , new MD2Parser(lexer));
         parsers.put(MD5 , new MD5Parser(lexer));
+        parsers.put(SHA1 , new SHA1Parser(lexer));
         parsers.put(DEFINE, new DefineParser(lexer));
     }
 

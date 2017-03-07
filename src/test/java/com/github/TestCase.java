@@ -9,6 +9,7 @@ import com.github.generator.expersions.functions.ranges.StringRange;
 import com.github.generator.expersions.functions.uniqueness.Identity;
 import com.github.generator.expersions.functions.uniqueness.MD2;
 import com.github.generator.expersions.functions.uniqueness.MD5;
+import com.github.generator.expersions.functions.uniqueness.SHA1;
 import com.github.generator.expersions.sink.ConsoleSink;
 import com.github.generator.expersions.terminals.CharTerminal;
 import com.github.generator.expersions.terminals.LongTerminal;
@@ -971,5 +972,20 @@ public class TestCase {
         Assert.assertEquals(1 , expList.size());
         Assert.assertTrue( expList.get(0) instanceof MD2);
         Assert.assertEquals(32 , seqExp.generate().length() );
+    }
+
+    @Test
+    public void test40() throws Exception {
+
+        String input = "SHA1()";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpersion seqExp = parser.parse();
+        List<Expersion> expList = seqExp.getExpersions();
+
+        Assert.assertEquals(1 , expList.size());
+        Assert.assertTrue( expList.get(0) instanceof SHA1);
+        Assert.assertEquals(40 , seqExp.generate().length() );
     }
 }
