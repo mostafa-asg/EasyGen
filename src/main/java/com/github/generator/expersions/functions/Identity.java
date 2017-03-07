@@ -17,6 +17,11 @@ public class Identity extends Expersion {
         this.increment = increment;
     }
 
+    //This method is just for unit testing and never used in application
+    public static void destroy(){
+        instance = null;
+    }
+
     public static Expersion getInstance(long seed , long increment){
         if( instance == null ){
             instance = new Identity(seed, increment);

@@ -916,6 +916,7 @@ public class TestCase {
     @Test
     public void test36() throws Exception {
 
+        Identity.destroy();
         String input = "IDENTITY(1,1) IDENTITY() IDENTITY() IDENTITY() IDENTITY()";
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
@@ -929,6 +930,7 @@ public class TestCase {
     @Test
     public void test37() throws Exception {
 
+        Identity.destroy();
         String input = "IDENTITY(120,2)' 'IDENTITY()' 'IDENTITY()' 'IDENTITY()' 'IDENTITY()";
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
