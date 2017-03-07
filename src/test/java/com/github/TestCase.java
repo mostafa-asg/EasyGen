@@ -7,6 +7,7 @@ import com.github.generator.expersions.functions.ranges.CharRange;
 import com.github.generator.expersions.functions.ranges.LongRange;
 import com.github.generator.expersions.functions.ranges.StringRange;
 import com.github.generator.expersions.functions.uniqueness.Identity;
+import com.github.generator.expersions.functions.uniqueness.MD2;
 import com.github.generator.expersions.functions.uniqueness.MD5;
 import com.github.generator.expersions.sink.ConsoleSink;
 import com.github.generator.expersions.terminals.CharTerminal;
@@ -954,6 +955,21 @@ public class TestCase {
 
         Assert.assertEquals(1 , expList.size());
         Assert.assertTrue( expList.get(0) instanceof MD5);
+        Assert.assertEquals(32 , seqExp.generate().length() );
+    }
+
+    @Test
+    public void test39() throws Exception {
+
+        String input = "MD2()";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpersion seqExp = parser.parse();
+        List<Expersion> expList = seqExp.getExpersions();
+
+        Assert.assertEquals(1 , expList.size());
+        Assert.assertTrue( expList.get(0) instanceof MD2);
         Assert.assertEquals(32 , seqExp.generate().length() );
     }
 }

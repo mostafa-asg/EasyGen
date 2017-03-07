@@ -22,6 +22,7 @@ public class FunctionTables {
             ParserProvider.DATE ,
             ParserProvider.TAB ,
             ParserProvider.IDENTITY ,
+            ParserProvider.MD2 ,
             ParserProvider.MD5 ,
 
             ParserProvider.CONSOLE ,
