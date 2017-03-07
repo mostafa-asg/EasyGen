@@ -1000,4 +1000,19 @@ public class TestCase {
         Assert.assertTrue( expList.get(0) instanceof SHA256);
         Assert.assertEquals(64 , seqExp.generate().length() );
     }
+
+    @Test
+    public void test42() throws Exception {
+
+        String input = "SHA512()";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpersion seqExp = parser.parse();
+        List<Expersion> expList = seqExp.getExpersions();
+
+        Assert.assertEquals(1 , expList.size());
+        Assert.assertTrue( expList.get(0) instanceof SHA512);
+        Assert.assertEquals(128 , seqExp.generate().length() );
+    }
 }

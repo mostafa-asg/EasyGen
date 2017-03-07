@@ -25,6 +25,7 @@ public class ParserProvider {
     public static final String MD5 = "MD5";
     public static final String SHA1 = "SHA1";
     public static final String SHA256 = "SHA256";
+    public static final String SHA512 = "SHA512";
     public static final String FILE = "FILE";
     public static final String CONSOLE = "CONSOLE";
     public static final String DEFINE = "DEFINE";
@@ -46,6 +47,7 @@ public class ParserProvider {
         parsers.put(MD5 , new MD5Parser(lexer));
         parsers.put(SHA1 , new SHA1Parser(lexer));
         parsers.put(SHA256 , new SHA256Parser(lexer));
+        parsers.put(SHA512 , new SHA512Parser(lexer));
         parsers.put(DEFINE, new DefineParser(lexer));
     }
 
