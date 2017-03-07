@@ -938,4 +938,19 @@ public class TestCase {
 
         Assert.assertEquals("120 122 124 126 128" , seqExp.generate());
     }
+
+    @Test
+    public void test38() throws Exception {
+
+        String input = "MD5()";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpersion seqExp = parser.parse();
+        List<Expersion> expList = seqExp.getExpersions();
+
+        Assert.assertEquals(1 , expList.size());
+        Assert.assertTrue( expList.get(0) instanceof MD5 );
+        Assert.assertEquals(32 , seqExp.generate().length() );
+    }
 }
