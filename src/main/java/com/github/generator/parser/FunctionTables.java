@@ -25,6 +25,7 @@ public class FunctionTables {
             ParserProvider.MD2 ,
             ParserProvider.MD5 ,
             ParserProvider.SHA1 ,
+            ParserProvider.SHA256 ,
 
             ParserProvider.CONSOLE ,
             ParserProvider.FILE
