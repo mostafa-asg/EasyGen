@@ -1015,4 +1015,33 @@ public class TestCase {
         Assert.assertTrue( expList.get(0) instanceof SHA512);
         Assert.assertEquals(128 , seqExp.generate().length() );
     }
+
+    @Test
+    public void test43() throws Exception {
+
+        String input = "[-30..-20]+[-10..10]-[-29..-28]";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpersion seqExp = parser.parse();
+        List<Expersion> expList = seqExp.getExpersions();
+
+        Assert.assertEquals(1, expList.size());
+        Assert.assertTrue(expList.get(0) instanceof LongRange);
+
+        LongRange longRange = ((LongRange) expList.get(0));
+        Iterator<LongTerminal> it = longRange.iterator();
+
+        Long num = new Long(-30);
+        while (it.hasNext()) {
+            Assert.assertEquals(num, it.next().getValue());
+            ++num;
+
+            if( num == -29 )
+                num = new Long(-27);
+            if( num == -19 )
+                num = new Long(-10);
+        }
+
+    }
 }

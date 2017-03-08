@@ -76,8 +76,28 @@ public abstract class AbstractParser implements IParser {
         String newInput = lexer.substring(currentPos,endPos);
 
         return new Parser(new Lexer(newInput)).parse();
-
     }
 
+    protected Token parseSignedNumber() throws ParseException {
+
+        String sign = "+";
+
+        Token token = lexer.nextToken();
+        if( token.getType() == Token.Type.MINUS ){
+            sign = "-";
+        }
+        else if( token.getType() == Token.Type.PLUS ){
+            sign = "+";
+        }
+        else if ( token.getType() == Token.Type.NUMBER ){
+            return token;
+        }
+        else{
+            throw new ParseException();
+        }
+
+        Token numb = ensureNextTokenIs(Token.Type.NUMBER);
+        return new Token( sign+numb.getValue() , Token.Type.NUMBER );
+    }
 
 }

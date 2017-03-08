@@ -46,7 +46,10 @@ public class RangeParser extends AbstractParser {
         int tempPos = lexer.getCurrentPosition();
         Token firstParam = lexer.nextToken();
 
-        if (firstParam.getType() == Token.Type.NUMBER) {
+        if (firstParam.getType() == Token.Type.NUMBER ||
+                (firstParam.getType() == Token.Type.PLUS || firstParam.getType() == Token.Type.MINUS
+                        && lexer.nextToken().getType() == Token.Type.NUMBER)
+        ){
             lexer.seek( tempPos );
             return parseLongRange(null,null);
         }
@@ -60,9 +63,9 @@ public class RangeParser extends AbstractParser {
     }
 
     private LongRange parseLongRange(LongRange prevLongRange , Token.Type operatorType) throws ParseException {
-        Token firstParam = ensureNextTokenIs(Token.Type.NUMBER);
+        Token firstParam = parseSignedNumber();
         ensureNextTokenIs( Token.Type.DOUBLE_DOT );
-        Token secondParam = ensureNextTokenIs(Token.Type.NUMBER);
+        Token secondParam = parseSignedNumber();
         ensureNextTokenIs( Token.Type.R_BRACKET);
 
         LongRange currentRange = new LongRange(firstParam.getValueAsLong(), secondParam.getValueAsLong());
