@@ -81,7 +81,7 @@ FILE (
 	)
 , /tmp/output.txt )
 ```
-The output is somthing like this :  
+The output is something like this :  
 ```
 -367    	-259    	189     	200     	340     	
 -295    	-240    	146     	234     	-325    	
