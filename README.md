@@ -64,6 +64,31 @@ CONSOLE(
 	, 6)
 )
 ```
+**Example 3:**  
+To generate 25 random number between -500 to 500, in 5 rows and 5 columns, and output the result to both _console_ and _file_ you can write :  
+```
+DEFINE( RAND_NUM AS [-500..500] )
+
+FILE (
+	CONSOLE (
+
+		REP(
+			REP(
+				PAD_RIGHT(RAND_NUM,8,' ') TAB()
+			, 5 )
+			NEW_LINE()
+		, 5)
+	)
+, /tmp/output.txt )
+```
+The output is somthing like this :  
+```
+-367    	-259    	189     	200     	340     	
+-295    	-240    	146     	234     	-325    	
+-387    	-147    	3       	405     	-458    	
+-132    	-369    	363     	-306    	-249    	
+265     	-135    	466     	-117    	-250
+```
 
 ## DSL Syntax
 * [Ranges](https://github.com/mostafa-asg/EasyGen/wiki/Ranges)
