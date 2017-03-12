@@ -1,14 +1,14 @@
 package com.github.generator.expersions.functions.uniqueness;
 
-import com.github.generator.expersions.Expersion;
+import com.github.generator.expersions.Expression;
 
 /**
  * @author Mostafa Asgari
  * @since 3/6/17
  */
-public class Identity extends Expersion {
+public class Identity extends Expression {
 
-    private static Expersion instance;
+    private static Expression instance;
     private long increment;
     private long current;
 
@@ -22,7 +22,7 @@ public class Identity extends Expersion {
         instance = null;
     }
 
-    public static Expersion getInstance(long seed , long increment){
+    public static Expression getInstance(long seed , long increment){
         if( instance == null ){
             instance = new Identity(seed, increment);
         }
@@ -30,7 +30,7 @@ public class Identity extends Expersion {
         return instance;
     }
 
-    public static Expersion getInstance() {
+    public static Expression getInstance() {
         if(instance == null)
             throw new RuntimeException("Identity must be initialized");
         return instance;

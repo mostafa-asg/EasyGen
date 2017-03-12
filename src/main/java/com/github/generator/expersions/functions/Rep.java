@@ -1,34 +1,34 @@
 package com.github.generator.expersions.functions;
 
-import com.github.generator.expersions.Expersion;
+import com.github.generator.expersions.Expression;
 
 import java.util.Random;
 
 /**
  * Created by Mostafa on 02/17/2017.
  */
-public class Rep extends Expersion {
+public class Rep extends Expression {
 
-    private Expersion expersion;
+    private Expression expression;
     private int minimumLength;
     private int maximumLength;
 
-    public Rep(Expersion expersion, int minimumLength){
-        this(expersion,minimumLength,minimumLength);
+    public Rep(Expression expression, int minimumLength){
+        this(expression,minimumLength,minimumLength);
     }
 
-    public Rep(Expersion expersion, int minimumLength, int maximumLength) {
+    public Rep(Expression expression, int minimumLength, int maximumLength) {
 
         if( minimumLength > maximumLength )
             throw new IllegalArgumentException("" + minimumLength + " must be less than or eqaul to" + maximumLength);
 
-        this.expersion = expersion;
+        this.expression = expression;
         this.minimumLength = minimumLength;
         this.maximumLength = maximumLength;
     }
 
-    public Expersion getExpersion() {
-        return expersion;
+    public Expression getExpression() {
+        return expression;
     }
 
     public int getMinimumLength() {
@@ -53,7 +53,7 @@ public class Rep extends Expersion {
         }
 
         for(int i=start;i<=length;i++){
-            sb.append(expersion.generate());
+            sb.append(expression.generate());
         }
 
         return sb.toString();

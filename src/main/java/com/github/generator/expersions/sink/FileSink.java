@@ -1,6 +1,6 @@
 package com.github.generator.expersions.sink;
 
-import com.github.generator.expersions.Expersion;
+import com.github.generator.expersions.Expression;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -10,14 +10,14 @@ import java.nio.file.FileAlreadyExistsException;
  * @author Mostafa Asgari
  * @since 2/26/17
  */
-public class FileSink extends Expersion {
+public class FileSink extends Expression {
 
-    private Expersion expersion;
+    private Expression expression;
     private boolean append;
     private String path;
 
-    public FileSink(Expersion expersion, String path , boolean append) {
-        this.expersion = expersion;
+    public FileSink(Expression expression, String path , boolean append) {
+        this.expression = expression;
         this.path = path;
         this.append = append;
     }
@@ -30,7 +30,7 @@ public class FileSink extends Expersion {
             throw new FileAlreadyExistsException(path);
         }
 
-        String content = expersion.generate();
+        String content = expression.generate();
 
         FileWriter fileWriter = new FileWriter(file,append);
         fileWriter.write(content);

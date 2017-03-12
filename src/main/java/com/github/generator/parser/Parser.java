@@ -1,6 +1,6 @@
 package com.github.generator.parser;
 
-import com.github.generator.expersions.SequenceExpersion;
+import com.github.generator.expersions.SequenceExpression;
 import com.github.generator.expersions.terminals.StringTerminal;
 
 /**
@@ -16,9 +16,9 @@ public class Parser extends AbstractParser {
         parserProvider = new ParserProvider(lexer);
     }
 
-    public SequenceExpersion parse() throws ParseException {
+    public SequenceExpression parse() throws ParseException {
 
-        SequenceExpersion result = new SequenceExpersion();
+        SequenceExpression result = new SequenceExpression();
 
         while (true){
 

@@ -1,6 +1,6 @@
 package com.github.generator.parser;
 
-import com.github.generator.expersions.Expersion;
+import com.github.generator.expersions.Expression;
 
 /**
  * Created by Mostafa on 02/23/2017.
@@ -60,7 +60,7 @@ public abstract class AbstractParser implements IParser {
         return token;
     }
 
-    protected Expersion parseUntilNextComma() throws ParseException {
+    protected Expression parseUntilNextComma() throws ParseException {
 
         int currentPos = lexer.getCurrentPosition();
         int endPos = lexer.findFirstCommaPosition();
@@ -69,7 +69,7 @@ public abstract class AbstractParser implements IParser {
         return new Parser(new Lexer(newInput)).parse();
     }
 
-    protected Expersion parseUntilNextRightParenthese() throws ParseException {
+    protected Expression parseUntilNextRightParenthese() throws ParseException {
 
         int currentPos = lexer.getCurrentPosition();
         int endPos = lexer.findFirstRightParenthese();

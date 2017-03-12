@@ -1,6 +1,6 @@
 package com.github.generator.parser.padding;
 
-import com.github.generator.expersions.Expersion;
+import com.github.generator.expersions.Expression;
 import com.github.generator.expersions.functions.PadLeft;
 import com.github.generator.parser.Lexer;
 
@@ -15,7 +15,7 @@ public class PadLeftParser extends PadParser {
     }
 
     @Override
-    public Expersion getPad(Expersion firstParam, int minLength, char fillWith) {
+    public Expression getPad(Expression firstParam, int minLength, char fillWith) {
         return new PadLeft( firstParam , minLength , fillWith );
     }
 }

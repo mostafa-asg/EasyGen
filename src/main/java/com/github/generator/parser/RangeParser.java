@@ -1,6 +1,6 @@
 package com.github.generator.parser;
 
-import com.github.generator.expersions.Expersion;
+import com.github.generator.expersions.Expression;
 import com.github.generator.expersions.functions.ranges.CharRange;
 import com.github.generator.expersions.functions.ranges.LongRange;
 import com.github.generator.expersions.functions.ranges.Range;
@@ -17,7 +17,7 @@ public class RangeParser extends AbstractParser {
     }
 
     @Override
-    public Expersion parse() throws ParseException {
+    public Expression parse() throws ParseException {
         boolean isPipeDelimiter = false;
 
         int tempPos = lexer.getCurrentPosition();

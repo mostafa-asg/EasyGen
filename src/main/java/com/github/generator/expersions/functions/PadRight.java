@@ -1,24 +1,24 @@
 package com.github.generator.expersions.functions;
 
-import com.github.generator.expersions.Expersion;
+import com.github.generator.expersions.Expression;
 
 /**
  * Created by Mostafa on 02/17/2017.
  */
-public class PadRight extends Expersion {
+public class PadRight extends Expression {
 
-    private Expersion expersion;
+    private Expression expression;
     private int minimumLength;
     private char fillWith;
 
-    public PadRight(Expersion expersion, int minimumLength, char fillWith) {
-        this.expersion = expersion;
+    public PadRight(Expression expression, int minimumLength, char fillWith) {
+        this.expression = expression;
         this.minimumLength = minimumLength;
         this.fillWith = fillWith;
     }
 
-    public Expersion getExpersion() {
-        return expersion;
+    public Expression getExpression() {
+        return expression;
     }
 
     public int getMinimumLength() {
@@ -32,7 +32,7 @@ public class PadRight extends Expersion {
     @Override
     public String generate() throws Exception {
 
-        String value = expersion.generate();
+        String value = expression.generate();
 
         if( value.length() >= minimumLength ) {
             return value;

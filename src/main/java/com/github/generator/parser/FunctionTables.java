@@ -1,10 +1,5 @@
 package com.github.generator.parser;
 
-import com.github.generator.expersions.Expersion;
-
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @author Mostafa Asgari
  * @since 2/20/17

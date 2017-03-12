@@ -1,6 +1,6 @@
 package com.github.generator.parser;
 
-import com.github.generator.expersions.Expersion;
+import com.github.generator.expersions.Expression;
 
 /**
  * @author Mostafa Asgari
@@ -12,7 +12,7 @@ public class DefineParser extends AbstractParser {
         super(lexer);
     }
 
-    public Expersion parse() throws ParseException {
+    public Expression parse() throws ParseException {
 
         ensureNextTokenIs(Token.Type.L_PARENTHESE);
 

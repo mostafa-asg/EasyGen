@@ -1,6 +1,6 @@
 package com.github.generator.parser;
 
-import com.github.generator.expersions.Expersion;
+import com.github.generator.expersions.Expression;
 import com.github.generator.expersions.functions.Rep;
 
 /**
@@ -13,11 +13,11 @@ public class RepParser extends AbstractParser {
     }
 
     @Override
-    public Expersion parse() throws ParseException {
+    public Expression parse() throws ParseException {
 
         ensureNextTokenIs(Token.Type.L_PARENTHESE);
 
-        Expersion firstParam = parseUntilNextComma();
+        Expression firstParam = parseUntilNextComma();
 
         ensureNextTokenIs(Token.Type.COMMA);
         Token secondParam = ensureNextTokenIs(Token.Type.NUMBER);

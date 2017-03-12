@@ -1,27 +1,27 @@
 package com.github.generator.expersions.sink;
 
-import com.github.generator.expersions.Expersion;
+import com.github.generator.expersions.Expression;
 
 /**
  * @author Mostafa Asgari
  * @since 2/26/17
  */
-public class ConsoleSink extends Expersion {
+public class ConsoleSink extends Expression {
 
-    private Expersion expersion;
+    private Expression expression;
 
-    public ConsoleSink(Expersion expersion) {
-        this.expersion = expersion;
+    public ConsoleSink(Expression expression) {
+        this.expression = expression;
     }
 
-    public Expersion getExpersion() {
-        return expersion;
+    public Expression getExpression() {
+        return expression;
     }
 
     @Override
     public String generate() throws Exception {
 
-        String output = expersion.generate();
+        String output = expression.generate();
 
         System.out.print( output );
 

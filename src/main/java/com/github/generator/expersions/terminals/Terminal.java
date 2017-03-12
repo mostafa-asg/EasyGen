@@ -1,11 +1,11 @@
 package com.github.generator.expersions.terminals;
 
-import com.github.generator.expersions.Expersion;
+import com.github.generator.expersions.Expression;
 
 /**
  * Created by Mostafa on 02/17/2017.
  */
-public abstract class Terminal<T> extends Expersion {
+public abstract class Terminal<T> extends Expression {
 
     private T terminal;
 

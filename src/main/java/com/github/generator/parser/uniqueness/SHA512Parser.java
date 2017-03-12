@@ -1,6 +1,6 @@
 package com.github.generator.parser.uniqueness;
 
-import com.github.generator.expersions.Expersion;
+import com.github.generator.expersions.Expression;
 import com.github.generator.expersions.functions.uniqueness.SHA512;
 import com.github.generator.parser.AbstractParser;
 import com.github.generator.parser.Lexer;
@@ -17,7 +17,7 @@ public class SHA512Parser extends AbstractParser {
         super(lexer);
     }
 
-    public Expersion parse() throws ParseException {
+    public Expression parse() throws ParseException {
 
         ensureNextTokenIs(Token.Type.L_PARENTHESE);
         ensureNextTokenIs(Token.Type.R_PARENTHESE);

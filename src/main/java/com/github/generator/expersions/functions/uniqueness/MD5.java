@@ -6,7 +6,7 @@ import org.apache.commons.codec.digest.DigestUtils;
  * @author Mostafa Asgari
  * @since 3/7/17
  */
-public class MD5 extends DigestExpersion {
+public class MD5 extends DigestExpression {
 
     @Override
     protected String getDigest(String data) {

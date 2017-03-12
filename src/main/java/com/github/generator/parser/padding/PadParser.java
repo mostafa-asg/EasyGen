@@ -1,6 +1,6 @@
 package com.github.generator.parser.padding;
 
-import com.github.generator.expersions.Expersion;
+import com.github.generator.expersions.Expression;
 import com.github.generator.parser.AbstractParser;
 import com.github.generator.parser.Lexer;
 import com.github.generator.parser.ParseException;
@@ -16,11 +16,11 @@ public abstract class PadParser extends AbstractParser {
         super(lexer);
     }
 
-    public Expersion parse() throws ParseException {
+    public Expression parse() throws ParseException {
 
         ensureNextTokenIs(Token.Type.L_PARENTHESE);
 
-        Expersion firstParam = parseUntilNextComma() ;
+        Expression firstParam = parseUntilNextComma() ;
 
         ensureNextTokenIs( Token.Type.COMMA );
 
@@ -48,5 +48,5 @@ public abstract class PadParser extends AbstractParser {
         return getPad(firstParam , minLengthToken.getValueAsInt() , fillWith);
     }
 
-    public abstract Expersion getPad(Expersion firstParam , int minLength , char fillWith);
+    public abstract Expression getPad(Expression firstParam , int minLength , char fillWith);
 }

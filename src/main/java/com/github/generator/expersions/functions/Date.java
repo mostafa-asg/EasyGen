@@ -1,13 +1,13 @@
 package com.github.generator.expersions.functions;
 
-import com.github.generator.expersions.Expersion;
+import com.github.generator.expersions.Expression;
 
 import java.text.SimpleDateFormat;
 
 /**
  * Created by Mostafa on 02/17/2017.
  */
-public class Date extends Expersion {
+public class Date extends Expression {
 
     private SimpleDateFormat dateFormat;
 

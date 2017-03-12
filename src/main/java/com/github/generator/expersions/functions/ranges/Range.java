@@ -1,7 +1,7 @@
 package com.github.generator.expersions.functions.ranges;
 
 
-import com.github.generator.expersions.Expersion;
+import com.github.generator.expersions.Expression;
 import com.github.generator.expersions.terminals.Terminal;
 
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import java.util.Random;
 /**
  * Created by Mostafa on 02/17/2017.
  */
-public abstract class Range<T extends Terminal> extends Expersion implements Iterable<T> {
+public abstract class Range<T extends Terminal> extends Expression implements Iterable<T> {
 
     private Random rnd = new Random();
 

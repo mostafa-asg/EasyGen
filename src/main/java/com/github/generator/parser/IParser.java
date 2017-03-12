@@ -1,12 +1,12 @@
 package com.github.generator.parser;
 
-import com.github.generator.expersions.Expersion;
+import com.github.generator.expersions.Expression;
 
 /**
  * Created by Mostafa on 02/23/2017.
  */
 public interface IParser {
 
-    public Expersion parse() throws ParseException;
+    public Expression parse() throws ParseException;
 
 }

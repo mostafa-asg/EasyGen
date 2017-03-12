@@ -1,7 +1,7 @@
 package com.github;
 
-import com.github.generator.expersions.Expersion;
-import com.github.generator.expersions.SequenceExpersion;
+import com.github.generator.expersions.Expression;
+import com.github.generator.expersions.SequenceExpression;
 import com.github.generator.expersions.functions.*;
 import com.github.generator.expersions.functions.ranges.CharRange;
 import com.github.generator.expersions.functions.ranges.LongRange;
@@ -34,8 +34,8 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
 
         Assert.assertEquals(2, expList.size());
 
@@ -65,8 +65,8 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
 
         Assert.assertEquals(2, expList.size());
 
@@ -96,8 +96,8 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
 
         Assert.assertEquals(3, expList.size());
 
@@ -138,8 +138,8 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
 
         Assert.assertEquals(1, expList.size());
 
@@ -161,8 +161,8 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
 
         Assert.assertEquals(1, expList.size());
 
@@ -185,8 +185,8 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
 
         Assert.assertEquals(2, expList.size());
 
@@ -218,8 +218,8 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
 
         Assert.assertEquals(4, expList.size());
 
@@ -274,12 +274,12 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
 
         Assert.assertEquals(11, expList.size());
-        Assert.assertTrue(seqExp.getExpersions().get(4) instanceof CharRange);
-        Assert.assertTrue(seqExp.getExpersions().get(9) instanceof LongRange);
+        Assert.assertTrue(seqExp.getExpressions().get(4) instanceof CharRange);
+        Assert.assertTrue(seqExp.getExpressions().get(9) instanceof LongRange);
 
         //------------------------------------------------
         CharRange charRange = ((CharRange) expList.get(4));
@@ -308,8 +308,8 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
 
         Assert.assertEquals(1, expList.size());
         Assert.assertTrue(expList.get(0) instanceof StringRange);
@@ -330,8 +330,8 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
 
         Assert.assertEquals(1, expList.size());
         Assert.assertTrue(expList.get(0) instanceof StringRange);
@@ -352,8 +352,8 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
 
         Assert.assertEquals(1, expList.size());
         Assert.assertTrue(expList.get(0) instanceof StringRange);
@@ -374,8 +374,8 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
 
         Assert.assertEquals(1, expList.size());
         Assert.assertTrue(expList.get(0) instanceof StringRange);
@@ -396,8 +396,8 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
 
         Assert.assertEquals(1, expList.size());
         Assert.assertTrue(expList.get(0) instanceof StringTerminal);
@@ -410,8 +410,8 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
 
         Assert.assertEquals(1, expList.size());
         Assert.assertTrue(expList.get(0) instanceof StringTerminal);
@@ -425,19 +425,19 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
 
         Assert.assertEquals(1, expList.size());
         Assert.assertTrue(expList.get(0) instanceof Rep);
 
         Rep rep = (Rep) expList.get(0);
-        Assert.assertTrue(rep.getExpersion() instanceof SequenceExpersion);
+        Assert.assertTrue(rep.getExpression() instanceof SequenceExpression);
 
         Assert.assertEquals(34, rep.getMinimumLength());
         Assert.assertEquals(34, rep.getMaximumLength());
 
-        Iterator<CharTerminal> it = ((CharRange) ((SequenceExpersion) rep.getExpersion()).getExpersions().get(0)).iterator();
+        Iterator<CharTerminal> it = ((CharRange) ((SequenceExpression) rep.getExpression()).getExpressions().get(0)).iterator();
         char ch = 'a';
         while (it.hasNext()) {
             Assert.assertTrue(it.next().getValue() == ch);
@@ -453,18 +453,18 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
 
         Assert.assertEquals(1, expList.size());
         Assert.assertTrue(expList.get(0) instanceof Rep);
 
         Rep rep = (Rep) expList.get(0);
-        Assert.assertTrue(rep.getExpersion() instanceof SequenceExpersion);
+        Assert.assertTrue(rep.getExpression() instanceof SequenceExpression);
         Assert.assertEquals(3, rep.getMinimumLength());
         Assert.assertEquals(7, rep.getMaximumLength());
 
-        Iterator<LongTerminal> it = ((LongRange) ((SequenceExpersion) rep.getExpersion()).getExpersions().get(0)).iterator();
+        Iterator<LongTerminal> it = ((LongRange) ((SequenceExpression) rep.getExpression()).getExpressions().get(0)).iterator();
 
         Long num = new Long(10);
         while (it.hasNext()) {
@@ -481,22 +481,22 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
         Assert.assertEquals(1, expList.size());
         Assert.assertTrue(expList.get(0) instanceof Rep);
 
         Rep outerRep = (Rep) expList.get(0);
-        Assert.assertTrue(outerRep.getExpersion() instanceof SequenceExpersion);
+        Assert.assertTrue(outerRep.getExpression() instanceof SequenceExpression);
         Assert.assertEquals(3, outerRep.getMinimumLength());
         Assert.assertEquals(3, outerRep.getMaximumLength());
 
-        Rep innerRep = (Rep) ((SequenceExpersion) outerRep.getExpersion()).getExpersions().get(0);
-        Assert.assertTrue(innerRep.getExpersion() instanceof SequenceExpersion);
+        Rep innerRep = (Rep) ((SequenceExpression) outerRep.getExpression()).getExpressions().get(0);
+        Assert.assertTrue(innerRep.getExpression() instanceof SequenceExpression);
         Assert.assertEquals(2, innerRep.getMinimumLength());
         Assert.assertEquals(2, innerRep.getMaximumLength());
 
-        Iterator<StringTerminal> it = ((StringRange) ((SequenceExpersion) innerRep.getExpersion()).getExpersions().get(0)).iterator();
+        Iterator<StringTerminal> it = ((StringRange) ((SequenceExpression) innerRep.getExpression()).getExpressions().get(0)).iterator();
         String[] words = new String[]{"Hello", "World", "EasyGen"};
         int i = 0;
 
@@ -513,8 +513,8 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
         Assert.assertEquals(1, expList.size());
         Assert.assertTrue(expList.get(0) instanceof Date);
     }
@@ -526,8 +526,8 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
         Assert.assertEquals(1, expList.size());
         Assert.assertTrue(expList.get(0) instanceof Date);
     }
@@ -539,8 +539,8 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
         Assert.assertEquals(3, expList.size());
         Assert.assertTrue(expList.get(0) instanceof StringTerminal);
         Assert.assertTrue(expList.get(1) instanceof Newline);
@@ -559,8 +559,8 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
         Assert.assertEquals(1, expList.size());
         Assert.assertTrue(expList.get(0) instanceof LongRange);
 
@@ -583,8 +583,8 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
         Assert.assertEquals(1, expList.size());
         Assert.assertTrue(expList.get(0) instanceof LongRange);
 
@@ -606,8 +606,8 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
         Assert.assertEquals(1, expList.size());
         Assert.assertTrue(expList.get(0) instanceof LongRange);
 
@@ -630,8 +630,8 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
         Assert.assertEquals(1, expList.size());
         Assert.assertTrue(expList.get(0) instanceof CharRange);
 
@@ -653,8 +653,8 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
         Assert.assertEquals(1, expList.size());
         Assert.assertTrue(expList.get(0) instanceof CharRange);
 
@@ -688,16 +688,16 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
         Assert.assertEquals(1, expList.size());
         Assert.assertTrue(expList.get(0) instanceof Rep);
 
-        Assert.assertTrue(((Rep) expList.get(0)).getExpersion() instanceof SequenceExpersion);
-        SequenceExpersion repFirstExp = (SequenceExpersion) ((Rep) expList.get(0)).getExpersion();
-        Assert.assertEquals(2, repFirstExp.getExpersions().size());
-        Assert.assertTrue(repFirstExp.getExpersions().get(0) instanceof Date);
-        Assert.assertTrue(repFirstExp.getExpersions().get(1) instanceof Newline);
+        Assert.assertTrue(((Rep) expList.get(0)).getExpression() instanceof SequenceExpression);
+        SequenceExpression repFirstExp = (SequenceExpression) ((Rep) expList.get(0)).getExpression();
+        Assert.assertEquals(2, repFirstExp.getExpressions().size());
+        Assert.assertTrue(repFirstExp.getExpressions().get(0) instanceof Date);
+        Assert.assertTrue(repFirstExp.getExpressions().get(1) instanceof Newline);
         Assert.assertEquals(3, ((Rep) expList.get(0)).getMinimumLength());
         Assert.assertEquals(3, ((Rep) expList.get(0)).getMaximumLength());
 
@@ -710,18 +710,18 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
         Assert.assertEquals(1, expList.size());
         Assert.assertTrue(expList.get(0) instanceof Rep);
 
-        Assert.assertTrue(((Rep) expList.get(0)).getExpersion() instanceof SequenceExpersion);
-        SequenceExpersion repFirstExp = (SequenceExpersion) ((Rep) expList.get(0)).getExpersion();
-        Assert.assertEquals(3, repFirstExp.getExpersions().size());
-        Assert.assertTrue(repFirstExp.getExpersions().get(0) instanceof Date);
-        Assert.assertTrue(repFirstExp.getExpersions().get(1) instanceof StringTerminal);
-        Assert.assertEquals(",He,ll,o Wor,ld,", ((StringTerminal) repFirstExp.getExpersions().get(1)).getValue());
-        Assert.assertTrue(repFirstExp.getExpersions().get(2) instanceof Newline);
+        Assert.assertTrue(((Rep) expList.get(0)).getExpression() instanceof SequenceExpression);
+        SequenceExpression repFirstExp = (SequenceExpression) ((Rep) expList.get(0)).getExpression();
+        Assert.assertEquals(3, repFirstExp.getExpressions().size());
+        Assert.assertTrue(repFirstExp.getExpressions().get(0) instanceof Date);
+        Assert.assertTrue(repFirstExp.getExpressions().get(1) instanceof StringTerminal);
+        Assert.assertEquals(",He,ll,o Wor,ld,", ((StringTerminal) repFirstExp.getExpressions().get(1)).getValue());
+        Assert.assertTrue(repFirstExp.getExpressions().get(2) instanceof Newline);
         Assert.assertEquals(3, ((Rep) expList.get(0)).getMinimumLength());
         Assert.assertEquals(3, ((Rep) expList.get(0)).getMaximumLength());
 
@@ -734,8 +734,8 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
         Assert.assertEquals(3, expList.size());
 
         Assert.assertTrue(expList.get(0) instanceof StringTerminal);
@@ -757,23 +757,23 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
         Assert.assertEquals(1, expList.size());
         Assert.assertTrue(expList.get(0) instanceof ConsoleSink);
 
-        Assert.assertTrue(((ConsoleSink) expList.get(0)).getExpersion() instanceof SequenceExpersion);
-        SequenceExpersion innerConoleExp = (SequenceExpersion) ((ConsoleSink) expList.get(0)).getExpersion();
-        Assert.assertEquals(1, innerConoleExp.getExpersions().size());
-        Assert.assertTrue(innerConoleExp.getExpersions().get(0) instanceof Rep);
+        Assert.assertTrue(((ConsoleSink) expList.get(0)).getExpression() instanceof SequenceExpression);
+        SequenceExpression innerConoleExp = (SequenceExpression) ((ConsoleSink) expList.get(0)).getExpression();
+        Assert.assertEquals(1, innerConoleExp.getExpressions().size());
+        Assert.assertTrue(innerConoleExp.getExpressions().get(0) instanceof Rep);
 
-        Rep repExp = (Rep) innerConoleExp.getExpersions().get(0);
-        Assert.assertTrue(repExp.getExpersion() instanceof SequenceExpersion);
-        SequenceExpersion repInnerExp = (SequenceExpersion) repExp.getExpersion();
-        Assert.assertEquals(2, repInnerExp.getExpersions().size());
-        Assert.assertTrue(repInnerExp.getExpersions().get(0) instanceof StringTerminal);
-        Assert.assertTrue(repInnerExp.getExpersions().get(1) instanceof Newline);
-        Assert.assertEquals("HELLO WORLD", ((StringTerminal) repInnerExp.getExpersions().get(0)).getValue());
+        Rep repExp = (Rep) innerConoleExp.getExpressions().get(0);
+        Assert.assertTrue(repExp.getExpression() instanceof SequenceExpression);
+        SequenceExpression repInnerExp = (SequenceExpression) repExp.getExpression();
+        Assert.assertEquals(2, repInnerExp.getExpressions().size());
+        Assert.assertTrue(repInnerExp.getExpressions().get(0) instanceof StringTerminal);
+        Assert.assertTrue(repInnerExp.getExpressions().get(1) instanceof Newline);
+        Assert.assertEquals("HELLO WORLD", ((StringTerminal) repInnerExp.getExpressions().get(0)).getValue());
 
         String output = seqExp.generate();
         Assert.assertEquals("HELLO WORLD" + System.lineSeparator() +
@@ -789,8 +789,8 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
         Assert.assertEquals(7, expList.size());
         Assert.assertTrue(expList.get(0) instanceof StringRange);
         Assert.assertTrue(expList.get(1) instanceof StringTerminal);
@@ -808,8 +808,8 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
         Assert.assertEquals(1, expList.size());
         Assert.assertTrue(expList.get(0) instanceof Date);
     }
@@ -821,18 +821,18 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
 
         Assert.assertEquals(1, expList.size());
         Assert.assertTrue(expList.get(0) instanceof Rep);
 
         Rep rep = (Rep) expList.get(0);
-        Assert.assertTrue(rep.getExpersion() instanceof SequenceExpersion);
+        Assert.assertTrue(rep.getExpression() instanceof SequenceExpression);
         Assert.assertEquals(3, rep.getMinimumLength());
         Assert.assertEquals(7, rep.getMaximumLength());
 
-        Iterator<LongTerminal> it = ((LongRange) ((SequenceExpersion) rep.getExpersion()).getExpersions().get(0)).iterator();
+        Iterator<LongTerminal> it = ((LongRange) ((SequenceExpression) rep.getExpression()).getExpressions().get(0)).iterator();
 
         Long num = new Long(10);
         while (it.hasNext()) {
@@ -863,19 +863,19 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
 
         Assert.assertEquals(1, expList.size());
         Assert.assertTrue(expList.get(0) instanceof PadLeft);
 
         PadLeft padLeft = (PadLeft)expList.get(0);
-        Assert.assertTrue( padLeft.getExpersion() instanceof SequenceExpersion );
-        SequenceExpersion padLeftExp = (SequenceExpersion)padLeft.getExpersion();
-        Assert.assertEquals( 3 , padLeftExp.getExpersions().size() );
-        Assert.assertTrue( padLeftExp.getExpersions().get(0) instanceof CharRange );
-        Assert.assertTrue( padLeftExp.getExpersions().get(1) instanceof StringTerminal );
-        Assert.assertTrue( padLeftExp.getExpersions().get(2) instanceof CharRange );
+        Assert.assertTrue( padLeft.getExpression() instanceof SequenceExpression);
+        SequenceExpression padLeftExp = (SequenceExpression)padLeft.getExpression();
+        Assert.assertEquals( 3 , padLeftExp.getExpressions().size() );
+        Assert.assertTrue( padLeftExp.getExpressions().get(0) instanceof CharRange );
+        Assert.assertTrue( padLeftExp.getExpressions().get(1) instanceof StringTerminal );
+        Assert.assertTrue( padLeftExp.getExpressions().get(2) instanceof CharRange );
 
         String output = seqExp.generate();
         Assert.assertEquals( "***" , output.substring(0,3) );
@@ -892,19 +892,19 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
 
         Assert.assertEquals(1, expList.size());
         Assert.assertTrue(expList.get(0) instanceof PadRight);
 
         PadRight padRight = (PadRight) expList.get(0);
-        Assert.assertTrue( padRight.getExpersion() instanceof SequenceExpersion );
-        SequenceExpersion padRightExp = (SequenceExpersion)padRight.getExpersion();
-        Assert.assertEquals( 3 , padRightExp.getExpersions().size() );
-        Assert.assertTrue( padRightExp.getExpersions().get(0) instanceof CharRange );
-        Assert.assertTrue( padRightExp.getExpersions().get(1) instanceof StringTerminal );
-        Assert.assertTrue( padRightExp.getExpersions().get(2) instanceof CharRange );
+        Assert.assertTrue( padRight.getExpression() instanceof SequenceExpression);
+        SequenceExpression padRightExp = (SequenceExpression)padRight.getExpression();
+        Assert.assertEquals( 3 , padRightExp.getExpressions().size() );
+        Assert.assertTrue( padRightExp.getExpressions().get(0) instanceof CharRange );
+        Assert.assertTrue( padRightExp.getExpressions().get(1) instanceof StringTerminal );
+        Assert.assertTrue( padRightExp.getExpressions().get(2) instanceof CharRange );
 
         String output = seqExp.generate();
         Assert.assertTrue( output.charAt(0) == 'a' || output.charAt(0) == 'b' || output.charAt(0) == 'c' );
@@ -921,8 +921,8 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
 
         Assert.assertEquals("12345" , seqExp.generate());
     }
@@ -935,8 +935,8 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
 
         Assert.assertEquals("120 122 124 126 128" , seqExp.generate());
     }
@@ -948,8 +948,8 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
 
         Assert.assertEquals(1 , expList.size());
         Assert.assertTrue( expList.get(0) instanceof MD5);
@@ -963,8 +963,8 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
 
         Assert.assertEquals(1 , expList.size());
         Assert.assertTrue( expList.get(0) instanceof MD2);
@@ -978,8 +978,8 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
 
         Assert.assertEquals(1 , expList.size());
         Assert.assertTrue( expList.get(0) instanceof SHA1);
@@ -993,8 +993,8 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
 
         Assert.assertEquals(1 , expList.size());
         Assert.assertTrue( expList.get(0) instanceof SHA256);
@@ -1008,8 +1008,8 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
 
         Assert.assertEquals(1 , expList.size());
         Assert.assertTrue( expList.get(0) instanceof SHA512);
@@ -1023,8 +1023,8 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
 
         Assert.assertEquals(1, expList.size());
         Assert.assertTrue(expList.get(0) instanceof LongRange);
@@ -1051,8 +1051,8 @@ public class TestCase {
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
-        SequenceExpersion seqExp = parser.parse();
-        List<Expersion> expList = seqExp.getExpersions();
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
 
         Assert.assertEquals(1, expList.size());
         Assert.assertTrue(expList.get(0) instanceof CharRange);

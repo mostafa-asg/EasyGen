@@ -1,6 +1,6 @@
 package com.github.generator.expersions.functions.uniqueness;
 
-import com.github.generator.expersions.Expersion;
+import com.github.generator.expersions.Expression;
 import com.github.generator.expersions.functions.Rep;
 import com.github.generator.expersions.functions.ranges.CharRange;
 
@@ -8,7 +8,7 @@ import com.github.generator.expersions.functions.ranges.CharRange;
  * @author Mostafa Asgari
  * @since 3/7/17
  */
-public abstract class DigestExpersion extends Expersion {
+public abstract class DigestExpression extends Expression {
 
     @Override
     public String generate() throws Exception {
