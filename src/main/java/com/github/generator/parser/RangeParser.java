@@ -24,7 +24,17 @@ public class RangeParser extends AbstractParser {
 
         Token firstParam = lexer.nextToken();
         if( firstParam.getType() == Token.Type.SINGLE_QUOTES ){
-            isPipeDelimiter = true;
+            lexer.readSingleQuoteString();
+            Token token = lexer.nextToken();
+            if(token.getType() == Token.Type.PIPE) {
+                isPipeDelimiter = true;
+            }
+            else if(token.getType() == Token.Type.DOUBLE_DOT){
+                isPipeDelimiter = false;
+            }
+            else{
+                throw new ParseException();
+            }
         }
         else {
             lexer.seek(tempPos);
@@ -53,12 +63,10 @@ public class RangeParser extends AbstractParser {
             lexer.seek( tempPos );
             return parseLongRange(null,null);
         }
-        else  if (firstParam.getType() == Token.Type.CHAR) {
+        else {
             lexer.seek( tempPos );
             return parseCharRange(null,null);
         }
-
-        throw new ParseException();
 
     }
 
@@ -101,10 +109,27 @@ public class RangeParser extends AbstractParser {
         return currentRange;
     }
 
+    private Token parseCharRangeParameter() throws ParseException {
+
+        Token token = lexer.nextToken();
+        if( token.getType() == Token.Type.CHAR ) {
+            return token;
+        }
+        else if (token.getType() == Token.Type.SINGLE_QUOTES){
+            String content = lexer.readSingleQuoteString();
+            if( content.length() != 1 ){
+                throw new ParseException();
+            }
+            return new Token(content , Token.Type.CHAR);
+        }
+
+        throw new ParseException();
+    }
+
     private CharRange parseCharRange(CharRange prevCharRange , Token.Type operatorType) throws ParseException {
-        Token firstParam = ensureNextTokenIs(Token.Type.CHAR);
+        Token firstParam = parseCharRangeParameter();
         ensureNextTokenIs( Token.Type.DOUBLE_DOT );
-        Token secondParam = ensureNextTokenIs(Token.Type.CHAR);
+        Token secondParam = parseCharRangeParameter();
         ensureNextTokenIs( Token.Type.R_BRACKET);
 
         CharRange currentRange = new CharRange(firstParam.getValueAsChar(), secondParam.getValueAsChar());

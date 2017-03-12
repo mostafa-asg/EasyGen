@@ -1042,6 +1042,29 @@ public class TestCase {
             if( num == -19 )
                 num = new Long(-10);
         }
+    }
 
+    @Test
+    public void test44() throws Exception {
+
+        String input = "[' '..')']";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpersion seqExp = parser.parse();
+        List<Expersion> expList = seqExp.getExpersions();
+
+        Assert.assertEquals(1, expList.size());
+        Assert.assertTrue(expList.get(0) instanceof CharRange);
+
+        CharRange charRange = ((CharRange) expList.get(0));
+        Iterator<CharTerminal> it = charRange.iterator();
+
+        char ch = ' ';
+        while (it.hasNext()) {
+            Assert.assertTrue(it.next().getValue() == ch);
+            ++ch;
+        }
+        Assert.assertTrue(--ch == ')');
     }
 }
