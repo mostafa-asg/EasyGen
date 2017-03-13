@@ -24,7 +24,8 @@ public class FunctionTables {
             ParserProvider.SHA512 ,
 
             ParserProvider.CONSOLE ,
-            ParserProvider.FILE
+            ParserProvider.FILE ,
+            ParserProvider.SOCKET
     };
 
     public static boolean isAFunction(String functionName){

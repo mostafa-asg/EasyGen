@@ -28,6 +28,7 @@ public class ParserProvider {
     public static final String SHA512 = "SHA512";
     public static final String FILE = "FILE";
     public static final String CONSOLE = "CONSOLE";
+    public static final String SOCKET = "SOCKET";
     public static final String DEFINE = "DEFINE";
     public static final String RANGE = "range";
 
@@ -39,6 +40,7 @@ public class ParserProvider {
         parsers.put(RANGE, new RangeParser(lexer));
         parsers.put(FILE , new FileSinkParser(lexer));
         parsers.put(CONSOLE , new ConsoleSinkParser(lexer));
+        parsers.put(SOCKET , new SocketParser(lexer));
         parsers.put(TAB , new TabParser(lexer) );
         parsers.put(PAD_LEFT , new PadLeftParser(lexer));
         parsers.put(PAD_RIGHT , new PadRightParser(lexer));

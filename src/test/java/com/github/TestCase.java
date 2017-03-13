@@ -8,6 +8,7 @@ import com.github.generator.expersions.functions.ranges.LongRange;
 import com.github.generator.expersions.functions.ranges.StringRange;
 import com.github.generator.expersions.functions.uniqueness.*;
 import com.github.generator.expersions.sink.ConsoleSink;
+import com.github.generator.expersions.sink.Socket;
 import com.github.generator.expersions.terminals.CharTerminal;
 import com.github.generator.expersions.terminals.LongTerminal;
 import com.github.generator.expersions.terminals.StringTerminal;
@@ -1066,5 +1067,25 @@ public class TestCase {
             ++ch;
         }
         Assert.assertTrue(--ch == ')');
+    }
+
+    @Test
+    public void test45() throws Exception {
+
+        String input = "SOCKET( [Hello|Bye|Java|Go|Python|C++] , 127.0.0.1:5140 )";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
+
+        Assert.assertEquals(1, expList.size());
+        Assert.assertTrue(expList.get(0) instanceof Socket);
+        Socket socket = (Socket)expList.get(0);
+        Assert.assertEquals( 1 , ((SequenceExpression)socket.getExpression()).getExpressions().size() );
+        Assert.assertTrue( ((SequenceExpression)socket.getExpression()).getExpressions().get(0) instanceof StringRange );
+        Assert.assertEquals( "127.0.0.1" , socket.getHost() );
+        Assert.assertEquals( 5140 , socket.getPort() );
+
     }
 }
