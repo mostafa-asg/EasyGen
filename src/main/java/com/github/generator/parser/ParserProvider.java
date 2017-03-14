@@ -31,6 +31,7 @@ public class ParserProvider {
     public static final String SOCKET = "SOCKET";
     public static final String DEFINE = "DEFINE";
     public static final String RANGE = "range";
+    public static final String SLEEP = "SLEEP";
 
     public ParserProvider(Lexer lexer){
         parsers = new HashMap<String, IParser>();
@@ -51,6 +52,7 @@ public class ParserProvider {
         parsers.put(SHA256 , new SHA256Parser(lexer));
         parsers.put(SHA512 , new SHA512Parser(lexer));
         parsers.put(DEFINE, new DefineParser(lexer));
+        parsers.put(SLEEP, new SleepParser(lexer));
     }
 
     public IParser getParser(String parserName){

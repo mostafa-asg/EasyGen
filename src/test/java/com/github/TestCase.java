@@ -1088,4 +1088,21 @@ public class TestCase {
         Assert.assertEquals( 5140 , socket.getPort() );
 
     }
+
+    @Test
+    public void test46() throws Exception {
+
+        String input = "SLEEP( 250 )";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
+
+        Assert.assertEquals(1, expList.size());
+        Assert.assertTrue(expList.get(0) instanceof Sleep);
+        Sleep sleep = (Sleep) expList.get(0);
+        Assert.assertEquals( 250 , sleep.getMillis() );
+
+    }
 }
