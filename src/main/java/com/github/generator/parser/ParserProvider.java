@@ -17,6 +17,7 @@ public class ParserProvider {
     public static final String REP = "REP";
     public static final String NEW_LINE = "NEW_LINE";
     public static final String TODAY = "TODAY";
+    public static final String DATE = "DATE";
     public static final String PAD_LEFT = "PAD_LEFT";
     public static final String PAD_RIGHT = "PAD_RIGHT";
     public static final String TAB = "TAB";
@@ -38,6 +39,7 @@ public class ParserProvider {
         parsers.put(REP, new RepParser(lexer));
         parsers.put(NEW_LINE, new NewLineParser(lexer));
         parsers.put(TODAY, new TodayParser(lexer));
+        parsers.put(DATE, new DateParser(lexer));
         parsers.put(RANGE, new RangeParser(lexer));
         parsers.put(FILE , new FileSinkParser(lexer));
         parsers.put(CONSOLE , new ConsoleSinkParser(lexer));

@@ -12,11 +12,14 @@ import com.github.generator.expersions.sink.Socket;
 import com.github.generator.expersions.terminals.CharTerminal;
 import com.github.generator.expersions.terminals.LongTerminal;
 import com.github.generator.expersions.terminals.StringTerminal;
+import com.github.generator.parser.DateParser;
 import com.github.generator.parser.Lexer;
 import com.github.generator.parser.Parser;
+import com.github.generator.parser.ParserProvider;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -1105,4 +1108,30 @@ public class TestCase {
         Assert.assertEquals( 250 , sleep.getMillis() );
 
     }
+
+    @Test
+    public void test47() throws Exception {
+
+        String input = "DATE('2010-01-15 14:45:13')";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
+
+        Assert.assertEquals(1, expList.size());
+        Assert.assertTrue(expList.get(0) instanceof Date);
+        Date date = (Date)expList.get(0);
+
+        SimpleDateFormat paramDateFormat = new SimpleDateFormat(DateParser.PARAM_DATE_PATTERN);
+        Assert.assertEquals( "2010-01-15 14:45:13" , paramDateFormat.format(date.getStartDate()) );
+
+        java.util.Date generatedDate = new SimpleDateFormat().parse( seqExp.generate() );
+
+        Assert.assertTrue( paramDateFormat.parse("2010-01-15 14:45:13").getTime() <= generatedDate.getTime() );
+        Assert.assertTrue( generatedDate.getTime() <= (new java.util.Date()).getTime() );
+    }
+
+
+
 }
