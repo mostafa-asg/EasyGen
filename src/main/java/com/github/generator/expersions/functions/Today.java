@@ -7,15 +7,15 @@ import java.text.SimpleDateFormat;
 /**
  * Created by Mostafa on 02/17/2017.
  */
-public class Date extends Expression {
+public class Today extends Expression {
 
     private SimpleDateFormat dateFormat;
 
-    public Date() {
+    public Today() {
         dateFormat = new SimpleDateFormat();
     }
 
-    public Date(String pattern) {
+    public Today(String pattern) {
         dateFormat = new SimpleDateFormat(pattern);
     }
 

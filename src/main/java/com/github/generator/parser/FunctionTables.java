@@ -14,7 +14,7 @@ public class FunctionTables {
             ParserProvider.PAD_LEFT ,
             ParserProvider.PAD_RIGHT ,
             ParserProvider.NEW_LINE ,
-            ParserProvider.DATE ,
+            ParserProvider.TODAY,
             ParserProvider.TAB ,
             ParserProvider.IDENTITY ,
             ParserProvider.MD2 ,

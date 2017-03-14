@@ -510,27 +510,27 @@ public class TestCase {
     @Test
     public void test18() throws Exception {
 
-        String input = "DATE()";
+        String input = "TODAY()";
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
         SequenceExpression seqExp = parser.parse();
         List<Expression> expList = seqExp.getExpressions();
         Assert.assertEquals(1, expList.size());
-        Assert.assertTrue(expList.get(0) instanceof Date);
+        Assert.assertTrue(expList.get(0) instanceof Today);
     }
 
     @Test
     public void test19() throws Exception {
 
-        String input = "DATE(yyyy-MM-dd)";
+        String input = "TODAY(yyyy-MM-dd)";
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
         SequenceExpression seqExp = parser.parse();
         List<Expression> expList = seqExp.getExpressions();
         Assert.assertEquals(1, expList.size());
-        Assert.assertTrue(expList.get(0) instanceof Date);
+        Assert.assertTrue(expList.get(0) instanceof Today);
     }
 
     @Test
@@ -685,7 +685,7 @@ public class TestCase {
     @Test
     public void test26() throws Exception {
 
-        String input = "REP( DATE() NEW_LINE() , 3 )";
+        String input = "REP( TODAY() NEW_LINE() , 3 )";
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
@@ -697,7 +697,7 @@ public class TestCase {
         Assert.assertTrue(((Rep) expList.get(0)).getExpression() instanceof SequenceExpression);
         SequenceExpression repFirstExp = (SequenceExpression) ((Rep) expList.get(0)).getExpression();
         Assert.assertEquals(2, repFirstExp.getExpressions().size());
-        Assert.assertTrue(repFirstExp.getExpressions().get(0) instanceof Date);
+        Assert.assertTrue(repFirstExp.getExpressions().get(0) instanceof Today);
         Assert.assertTrue(repFirstExp.getExpressions().get(1) instanceof Newline);
         Assert.assertEquals(3, ((Rep) expList.get(0)).getMinimumLength());
         Assert.assertEquals(3, ((Rep) expList.get(0)).getMaximumLength());
@@ -707,7 +707,7 @@ public class TestCase {
     @Test
     public void test27() throws Exception {
 
-        String input = "REP( DATE() ',He,ll,o Wor,ld,' NEW_LINE() , 3 )";
+        String input = "REP( TODAY() ',He,ll,o Wor,ld,' NEW_LINE() , 3 )";
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
@@ -719,7 +719,7 @@ public class TestCase {
         Assert.assertTrue(((Rep) expList.get(0)).getExpression() instanceof SequenceExpression);
         SequenceExpression repFirstExp = (SequenceExpression) ((Rep) expList.get(0)).getExpression();
         Assert.assertEquals(3, repFirstExp.getExpressions().size());
-        Assert.assertTrue(repFirstExp.getExpressions().get(0) instanceof Date);
+        Assert.assertTrue(repFirstExp.getExpressions().get(0) instanceof Today);
         Assert.assertTrue(repFirstExp.getExpressions().get(1) instanceof StringTerminal);
         Assert.assertEquals(",He,ll,o Wor,ld,", ((StringTerminal) repFirstExp.getExpressions().get(1)).getValue());
         Assert.assertTrue(repFirstExp.getExpressions().get(2) instanceof Newline);
@@ -786,7 +786,7 @@ public class TestCase {
     @Test
     public void test30() throws Exception {
 
-        String input = "DEFINE( URL AS [http|https]:// REP([a..z]+[A..Z],3,10).[com|org|net] ) URL TAB() DATE()";
+        String input = "DEFINE( URL AS [http|https]:// REP([a..z]+[A..Z],3,10).[com|org|net] ) URL TAB() TODAY()";
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
@@ -799,20 +799,20 @@ public class TestCase {
         Assert.assertTrue(expList.get(3) instanceof StringTerminal);
         Assert.assertTrue(expList.get(4) instanceof StringRange);
         Assert.assertTrue(expList.get(5) instanceof Tab);
-        Assert.assertTrue(expList.get(6) instanceof Date);
+        Assert.assertTrue(expList.get(6) instanceof Today);
     }
 
     @Test
     public void test31() throws Exception {
 
-        String input = "DATE('yyyy-MM-dd H:m:s')";
+        String input = "TODAY('yyyy-MM-dd H:m:s')";
         Lexer lexer = new Lexer(input);
         Parser parser = new Parser(lexer);
 
         SequenceExpression seqExp = parser.parse();
         List<Expression> expList = seqExp.getExpressions();
         Assert.assertEquals(1, expList.size());
-        Assert.assertTrue(expList.get(0) instanceof Date);
+        Assert.assertTrue(expList.get(0) instanceof Today);
     }
 
     @Test

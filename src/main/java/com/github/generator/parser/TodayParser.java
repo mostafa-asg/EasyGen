@@ -1,14 +1,14 @@
 package com.github.generator.parser;
 
 import com.github.generator.expersions.Expression;
-import com.github.generator.expersions.functions.Date;
+import com.github.generator.expersions.functions.Today;
 
 /**
  * Created by Mostafa on 02/23/2017.
  */
-public class DateParser extends AbstractParser {
+public class TodayParser extends AbstractParser {
 
-    public DateParser(Lexer lexer) {
+    public TodayParser(Lexer lexer) {
         super(lexer);
     }
 
@@ -27,10 +27,10 @@ public class DateParser extends AbstractParser {
             parameter = token.getValue();
         }
         else if (token.getType() == Token.Type.R_PARENTHESE){
-            return new Date();
+            return new Today();
         }
 
         ensureNextTokenIs(Token.Type.R_PARENTHESE);
-        return new Date(parameter);
+        return new Today(parameter);
     }
 }
