@@ -20,7 +20,7 @@ DEFINE( COMMA AS ' , ' )
 FILE (
 	'UserEmailAddress , UserIP , DestinationIP , VisitedUrl , Date' NEW_LINE()
 	REP(
-		Email COMMA IP COMMA IP COMMA URL COMMA DATE('dd/MM/yyyy H:m:s') NEW_LINE()	
+		Email COMMA IP COMMA IP COMMA URL COMMA TODAY('dd/MM/yyyy H:m:s') NEW_LINE()	
 	, 100 )
 , /tmp/output.csv)
 ```
@@ -50,7 +50,7 @@ DEFINE( DRAW_LINE AS REP('-',80) NEW_LINE() )
 DEFINE( ID AS IDENTITY(1,1) )
 DEFINE( username AS REP([a..z]+[A..Z],3,18) )
 DEFINE( Pwd AS REP([a..z]+[A..Z],3,18) )
-DEFINE( Date AS DATE('yyyy/MM/dd H:m:s') )
+DEFINE( Date AS TODAY('yyyy/MM/dd H:m:s') )
 
 CONSOLE(
 
@@ -104,8 +104,8 @@ The output is something like this :
   * [TAB()](https://github.com/mostafa-asg/EasyGen/wiki/Functions#tab)
   * [REP( expression , number )](https://github.com/mostafa-asg/EasyGen/wiki/Functions#rep-expression--number-)
   * [REP( expression , min_number , max_number )](https://github.com/mostafa-asg/EasyGen/wiki/Functions#rep-expression--min_number--max_number-)
-  * [DATE()](https://github.com/mostafa-asg/EasyGen/wiki/Functions#date)
-  * [DATE( pattern )](https://github.com/mostafa-asg/EasyGen/wiki/Functions#date-pattern-)
+  * [TODAY()](https://github.com/mostafa-asg/EasyGen/wiki/Functions#today)
+  * [TODAY( pattern )](https://github.com/mostafa-asg/EasyGen/wiki/Functions#today-pattern-)
   * [PAD_LEFT( expression , minLength , fillChar )](https://github.com/mostafa-asg/EasyGen/wiki/Functions#pad_left-expression--minlength--fillchar-)
   * [PAD_RIGHT( expression , minLength , fillChar )](https://github.com/mostafa-asg/EasyGen/wiki/Functions#pad_right-expression--minlength--fillchar-)
   * Unique Identifier
