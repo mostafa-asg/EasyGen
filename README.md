@@ -20,7 +20,7 @@ DEFINE( COMMA AS ' , ' )
 FILE (
 	'UserEmailAddress , UserIP , DestinationIP , VisitedUrl , Date' NEW_LINE()
 	REP(
-		Email COMMA IP COMMA IP COMMA URL COMMA TODAY('dd/MM/yyyy H:m:s') NEW_LINE()	
+		Email COMMA IP COMMA IP COMMA URL COMMA DATE() NEW_LINE()	
 	, 100 )
 , /tmp/output.csv)
 ```
@@ -31,17 +31,17 @@ To output a table like bellow to the console :
 --------------------------------------------------------------------------------
 |UserID            |Username           |Password           |RegisterDate       |
 --------------------------------------------------------------------------------
-|1                 |YJBiPguRIOsyj      |UNaqeYYbMA         |2017/03/06 14:31:17|
+|1                 |wmOsTk             |dsaThwKnoWePoACcEC |3/29/15 2:26 AM    |
 --------------------------------------------------------------------------------
-|2                 |nwkk               |rfH                |2017/03/06 14:31:17|
+|2                 |xnozxgHao          |QkEwuX             |7/29/82 8:04 AM    |
 --------------------------------------------------------------------------------
-|3                 |MXukiLsbspasLJ     |qAnQaIDOEBjfoppY   |2017/03/06 14:31:17|
+|3                 |fkKLpkDUj          |NEIXIyshWWukmso    |4/15/02 9:56 PM    |
 --------------------------------------------------------------------------------
-|4                 |GbIYOTqZXrhQG      |JFJRslE            |2017/03/06 14:31:17|
+|4                 |FPIkm              |BbZbliZALcdV       |2/8/98 5:01 AM     |
 --------------------------------------------------------------------------------
-|5                 |ULhsyhsppJS        |utfhcKppbM         |2017/03/06 14:31:17|
+|5                 |vgFWVMwWJ          |qkBZjHAL           |2/7/12 8:07 PM     |
 --------------------------------------------------------------------------------
-|6                 |xSwWUFDvs          |FjscE              |2017/03/06 14:31:17|
+|6                 |kzTwL              |jpHQdBzrHW         |2/15/11 1:23 AM    |
 --------------------------------------------------------------------------------
 ```
 you can write:  
@@ -50,7 +50,6 @@ DEFINE( DRAW_LINE AS REP('-',80) NEW_LINE() )
 DEFINE( ID AS IDENTITY(1,1) )
 DEFINE( username AS REP([a..z]+[A..Z],3,18) )
 DEFINE( Pwd AS REP([a..z]+[A..Z],3,18) )
-DEFINE( Date AS TODAY('yyyy/MM/dd H:m:s') )
 
 CONSOLE(
 
@@ -59,7 +58,7 @@ CONSOLE(
 	DRAW_LINE
 
 	REP(
-		'|' PAD_RIGHT(ID,18,' ') '|' PAD_RIGHT(username,19,' ') '|' PAD_RIGHT(Pwd,19,' ') '|' PAD_RIGHT(Date,19,' ') '|' NEW_LINE()
+		'|' PAD_RIGHT(ID,18,' ') '|' PAD_RIGHT(username,19,' ') '|' PAD_RIGHT(Pwd,19,' ') '|' PAD_RIGHT(DATE(),19,' ') '|' NEW_LINE()
 		DRAW_LINE
 	, 6)
 )
