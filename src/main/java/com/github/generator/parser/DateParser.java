@@ -20,48 +20,55 @@ public class DateParser extends AbstractParser {
 
     public Expression parse() throws ParseException {
 
-        Date startDate = null;
+        Date startDate = new Date(0);
         Date endDate = new Date();
 
         ensureNextTokenIs( Token.Type.L_PARENTHESE );
-
-        try {
-            startDate = parameterDateFormat.parse(readString());
-        } catch (java.text.ParseException e) {
-            throw new ParseException(e.getMessage());
-        }
-
         Token token = lexer.nextToken();
-        if( token.getType() == Token.Type.R_PARENTHESE ){
+
+        if(token.getType() == Token.Type.R_PARENTHESE){
             return new com.github.generator.expersions.functions.Date(startDate,endDate);
         }
-        else if ( token.getType() == Token.Type.COMMA ){
+        else {
 
-            String secondParam = readString();
+            ensureCurrentTokenIs(Token.Type.SINGLE_QUOTES);
+
+            try {
+                startDate = parameterDateFormat.parse(lexer.readSingleQuoteString());
+            } catch (java.text.ParseException e) {
+                throw new ParseException(e.getMessage());
+            }
+
             token = lexer.nextToken();
 
-            if( token.getType() == Token.Type.R_PARENTHESE ){
-                return new com.github.generator.expersions.functions.Date(startDate,endDate,secondParam);
-            }
-            else if (token.getType() == Token.Type.COMMA){
+            if (token.getType() == Token.Type.R_PARENTHESE) {
+                return new com.github.generator.expersions.functions.Date(startDate, endDate);
+            } else if (token.getType() == Token.Type.COMMA) {
 
-                String thirdParam = readString();
-                ensureNextTokenIs(Token.Type.R_PARENTHESE);
+                String secondParam = readString();
+                token = lexer.nextToken();
 
-                try {
-                    endDate = parameterDateFormat.parse(secondParam);
-                } catch (java.text.ParseException e) {
-                    throw new ParseException(e.getMessage());
+                if (token.getType() == Token.Type.R_PARENTHESE) {
+                    return new com.github.generator.expersions.functions.Date(startDate, endDate, secondParam);
+                } else if (token.getType() == Token.Type.COMMA) {
+
+                    String thirdParam = readString();
+                    ensureNextTokenIs(Token.Type.R_PARENTHESE);
+
+                    try {
+                        endDate = parameterDateFormat.parse(secondParam);
+                    } catch (java.text.ParseException e) {
+                        throw new ParseException(e.getMessage());
+                    }
+
+                    return new com.github.generator.expersions.functions.Date(startDate, endDate, thirdParam);
+                } else {
+                    throw new ParseException();
                 }
-
-                return new com.github.generator.expersions.functions.Date(startDate,endDate,thirdParam);
-            }
-            else{
+            } else {
                 throw new ParseException();
             }
-        }
-        else{
-            throw new ParseException();
+
         }
     }
 }

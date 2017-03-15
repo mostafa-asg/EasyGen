@@ -3,6 +3,7 @@ package com.github;
 import com.github.generator.expersions.Expression;
 import com.github.generator.expersions.SequenceExpression;
 import com.github.generator.expersions.functions.*;
+import com.github.generator.expersions.functions.Date;
 import com.github.generator.expersions.functions.ranges.CharRange;
 import com.github.generator.expersions.functions.ranges.LongRange;
 import com.github.generator.expersions.functions.ranges.StringRange;
@@ -20,9 +21,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Mostafa Asgari
@@ -1132,6 +1131,74 @@ public class TestCase {
         Assert.assertTrue( generatedDate.getTime() <= (new java.util.Date()).getTime() );
     }
 
+    @Test
+    public void test48() throws Exception {
+
+        String input = "DATE()";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
+
+        Assert.assertEquals(1, expList.size());
+        Assert.assertTrue(expList.get(0) instanceof Date);
+        Date date = (Date)expList.get(0);
+
+        Assert.assertEquals( 0 , date.getStartDate().getTime() );
+
+        java.util.Date generatedDate = new SimpleDateFormat().parse( seqExp.generate() );
+
+        Assert.assertTrue( 0 <= generatedDate.getTime() );
+        Assert.assertTrue( generatedDate.getTime() <= (new java.util.Date()).getTime() );
+    }
+
+    @Test
+    public void test49() throws Exception {
+
+        String input = "DATE('2012-09-18 15:23:33',dd/MM/yyyy)";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
+
+        Assert.assertEquals(1, expList.size());
+        Assert.assertTrue(expList.get(0) instanceof Date);
+        Date date = (Date)expList.get(0);
+
+        SimpleDateFormat paramDateFormat = new SimpleDateFormat(DateParser.PARAM_DATE_PATTERN);
+        Assert.assertEquals( "2012-09-18 15:23:33" , paramDateFormat.format(date.getStartDate()) );
+
+        java.util.Date generatedDate = new SimpleDateFormat("dd/MM/yyyy").parse( seqExp.generate() );
+
+        Assert.assertTrue( paramDateFormat.parse("2012-09-18 15:23:33").getTime() <= generatedDate.getTime() );
+        Assert.assertTrue( generatedDate.getTime() <= (new java.util.Date()).getTime() );
+    }
+
+    @Test
+    public void test50() throws Exception {
+
+        String input = "DATE('2012-09-18 15:23:33','2015-11-20 21:0:5','yyyy/MM/dd H:m')";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
+
+        Assert.assertEquals(1, expList.size());
+        Assert.assertTrue(expList.get(0) instanceof Date);
+        Date date = (Date)expList.get(0);
+
+        SimpleDateFormat paramDateFormat = new SimpleDateFormat(DateParser.PARAM_DATE_PATTERN);
+        Assert.assertEquals( "2012-09-18 15:23:33" , paramDateFormat.format(date.getStartDate()) );
+        Assert.assertEquals( "2015-11-20 21:0:5" , paramDateFormat.format(date.getEndDate()) );
+
+        java.util.Date generatedDate = new SimpleDateFormat("yyyy/MM/dd H:m").parse( seqExp.generate() );
+
+        Assert.assertTrue( paramDateFormat.parse("2012-09-18 15:23:33").getTime() <= generatedDate.getTime() );
+        Assert.assertTrue( generatedDate.getTime() <= paramDateFormat.parse("2015-11-20 21:00:05").getTime() );
+    }
 
 
 }
