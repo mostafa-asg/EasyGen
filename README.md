@@ -1,6 +1,6 @@
 # EasyGen
 Welcome to the world of randomness! EasyGen is a very simple DSL to generate arbitrary amount of string data with ease.All you need 
-to do is, write your DSL into a file and pass file path to this program.Currently the generated data can be written to file or standard output. 
+to do is, write your DSL into a file and pass file path to this program.Currently the generated data can be written to file, standard output or socket. 
 
 ### How to build
 From the project folder run bellow commands to build and run the project:
@@ -89,6 +89,29 @@ The output is something like this :
 265     	-135    	466     	-117    	-250
 ```
 
+**Example 4:**  
+An example of sending the data to a socket.For example to send 100 metrics to [OpenTSDB](http://opentsdb.net/) you can write:  
+```
+DEFINE( TSD_ADDRESS AS 127.0.0.1:5140 )
+
+REP(
+
+	SOCKET(
+		'put sys.cpu.user 149'[1190000000..1209999999] ' ' [10..100].[0..9] ' ' host=webserver PAD_LEFT([0..20],2,'0') ' ' cpu=[0..15] NEW_LINE()
+        , TSD_ADDRESS)
+
+, 100 )	
+```
+It will send metrics to [OpenTSDB](http://opentsdb.net/) that is like :  
+```
+put sys.cpu.user 1491209684404 87.4 host=webserver08 cpu=4
+put sys.cpu.user 1491199717808 99.0 host=webserver08 cpu=1
+put sys.cpu.user 1491199318893 33.7 host=webserver09 cpu=14
+put sys.cpu.user 1491200493212 30.9 host=webserver07 cpu=12
+put sys.cpu.user 1491196496576 70.1 host=webserver10 cpu=10
+```
+which is valid [OpenTSDB](http://opentsdb.net/) syntax.
+
 ## DSL Syntax
 * [Ranges](https://github.com/mostafa-asg/EasyGen/wiki/Ranges)
     * [LongRange](https://github.com/mostafa-asg/EasyGen/wiki/LongRange)
@@ -105,6 +128,10 @@ The output is something like this :
   * [REP( expression , min_number , max_number )](https://github.com/mostafa-asg/EasyGen/wiki/Functions#rep-expression--min_number--max_number-)
   * [TODAY()](https://github.com/mostafa-asg/EasyGen/wiki/Functions#today)
   * [TODAY( pattern )](https://github.com/mostafa-asg/EasyGen/wiki/Functions#today-pattern-)
+  * [DATE()](https://github.com/mostafa-asg/EasyGen/wiki/Functions#date)
+  * [DATE( startDate )](https://github.com/mostafa-asg/EasyGen/wiki/Functions#date-startdate-)
+  * [DATE( startDate , outputPattern )](https://github.com/mostafa-asg/EasyGen/wiki/Functions#date-startdate--outputpattern-)
+  * [DATE( startDate , endDate , outputPattern )](https://github.com/mostafa-asg/EasyGen/wiki/Functions#date-startdate--enddate--outputpattern-)
   * [PAD_LEFT( expression , minLength , fillChar )](https://github.com/mostafa-asg/EasyGen/wiki/Functions#pad_left-expression--minlength--fillchar-)
   * [PAD_RIGHT( expression , minLength , fillChar )](https://github.com/mostafa-asg/EasyGen/wiki/Functions#pad_right-expression--minlength--fillchar-)
   * Unique Identifier
@@ -117,3 +144,4 @@ The output is something like this :
 * [Output](https://github.com/mostafa-asg/EasyGen/wiki/Output)
   * [CONSOLE](https://github.com/mostafa-asg/EasyGen/wiki/Output#console-expression-)
   * [FILE](https://github.com/mostafa-asg/EasyGen/wiki/Output#file-expression--path-)
+  * [SOCKET( expression , host:port )](https://github.com/mostafa-asg/EasyGen/wiki/Output#socket-expression--hostport-)
