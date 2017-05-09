@@ -13,10 +13,7 @@ import com.github.generator.expersions.sink.Socket;
 import com.github.generator.expersions.terminals.CharTerminal;
 import com.github.generator.expersions.terminals.LongTerminal;
 import com.github.generator.expersions.terminals.StringTerminal;
-import com.github.generator.parser.DateParser;
-import com.github.generator.parser.Lexer;
-import com.github.generator.parser.Parser;
-import com.github.generator.parser.ParserProvider;
+import com.github.generator.parser.*;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -1200,5 +1197,56 @@ public class TestCase {
         Assert.assertTrue( generatedDate.getTime() <= paramDateFormat.parse("2015-11-20 21:00:05").getTime() );
     }
 
+    @Test
+    public void test51() throws Exception {
+
+        long current = new java.util.Date().getTime();
+
+        String input = "TIMESTAMP()";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
+
+        Assert.assertEquals(1, expList.size());
+        long output = Long.parseLong(seqExp.generate());
+        Assert.assertTrue( output >= current );
+    }
+
+    @Test
+    public void test52() throws Exception {
+
+        String input = "TIMESTAMP(10000000)";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
+
+        Assert.assertEquals(1, expList.size());
+        long output = Long.parseLong(seqExp.generate());
+
+        long current = new java.util.Date().getTime();
+        Assert.assertTrue( output >= 10000000 && output<=current );
+
+    }
+
+    @Test
+    public void test53() throws Exception {
+
+        String input = "TIMESTAMP(10000000,20000000)";
+        Lexer lexer = new Lexer(input);
+        Parser parser = new Parser(lexer);
+
+        SequenceExpression seqExp = parser.parse();
+        List<Expression> expList = seqExp.getExpressions();
+
+        Assert.assertEquals(1, expList.size());
+        long output = Long.parseLong(seqExp.generate());
+
+        Assert.assertTrue( output >= 10000000 && output<=20000000 );
+
+    }
 
 }
