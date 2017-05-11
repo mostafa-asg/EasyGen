@@ -132,6 +132,9 @@ which is valid [OpenTSDB](http://opentsdb.net/) syntax.
   * [DATE( startDate )](https://github.com/mostafa-asg/EasyGen/wiki/Functions#date-startdate-)
   * [DATE( startDate , outputPattern )](https://github.com/mostafa-asg/EasyGen/wiki/Functions#date-startdate--outputpattern-)
   * [DATE( startDate , endDate , outputPattern )](https://github.com/mostafa-asg/EasyGen/wiki/Functions#date-startdate--enddate--outputpattern-)
+  * [TIMESTAMP()](https://github.com/mostafa-asg/EasyGen/wiki/Functions#timestamp)
+  * [TIMESTAMP(from)](https://github.com/mostafa-asg/EasyGen/wiki/Functions#timestampfrom)
+  * [TIMESTAMP(from,to](https://github.com/mostafa-asg/EasyGen/wiki/Functions#timestampfromto)
   * [PAD_LEFT( expression , minLength , fillChar )](https://github.com/mostafa-asg/EasyGen/wiki/Functions#pad_left-expression--minlength--fillchar-)
   * [PAD_RIGHT( expression , minLength , fillChar )](https://github.com/mostafa-asg/EasyGen/wiki/Functions#pad_right-expression--minlength--fillchar-)
   * Unique Identifier
