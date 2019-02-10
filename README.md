@@ -148,3 +148,6 @@ which is valid [OpenTSDB](http://opentsdb.net/) syntax.
   * [CONSOLE](https://github.com/mostafa-asg/EasyGen/wiki/Output#console-expression-)
   * [FILE](https://github.com/mostafa-asg/EasyGen/wiki/Output#file-expression--path-)
   * [SOCKET( expression , host:port )](https://github.com/mostafa-asg/EasyGen/wiki/Output#socket-expression--hostport-)
+  
+## Add to your project
+You can reference to this library by either of java build systems (Maven, Gradle, SBT or Leiningen) using snippets from this jitpack link: [![](https://jitpack.io/v/mostafa-asg/EasyGen.svg)](https://jitpack.io/#mostafa-asg/EasyGen)
